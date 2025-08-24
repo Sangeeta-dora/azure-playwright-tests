@@ -11,6 +11,14 @@ on:
         description: 'Test file to run'
         required: true
         default: 'tests/example.spec.js'
+      environment:     # 👈 dropdown/input field when triggering
+        description: "Environment to run tests against"
+        required: true
+        default: "qa"
+      workers:
+        description: 'Number of workers'
+        required: false
+        default: '4'  
 
 jobs:
   playwright-test:
@@ -43,7 +51,7 @@ jobs:
       - name: Run Playwright Tests
         run: |
           cd azure-repo
-          npx playwright test ${{ github.event.inputs.testFile }} --reporter=html --output=playwright-report
+          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=html --output=playwright-report --workers=${{ github.event.inputs.workers }}
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
