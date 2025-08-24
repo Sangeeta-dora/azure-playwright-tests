@@ -36,11 +36,11 @@ jobs:
       - name: Run Playwright Tests
         run: |
           cd azure-repo
-          npx playwright test --reporter=html --output=playwright-report
+          npx playwright test ${{ github.event.inputs.testFile }} --reporter=html --output=playwright-report
 
       # 5. Upload report as artifact (downloadable)
       - name: Upload Playwright Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: azure-repo/playwright-report
