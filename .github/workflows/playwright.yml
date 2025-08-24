@@ -1,0 +1,42 @@
+name: Run Playwright Tests (Azure Repo)
+
+on:
+  workflow_dispatch:   # allows manual run
+    inputs:
+      branch:
+        description: 'Branch from Azure'
+        required: true
+        default: 'main'
+      testFile:
+        description: 'Test file to run'
+        required: true
+        default: 'tests/example.spec.js'
+
+jobs:
+  playwright-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Azure Repo
+        uses: actions/checkout@v3
+        with:
+          repository: <org>/<project>/_git/<repo-name>
+          token: ${{ secrets.AZURE_PAT }}
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Playwright Tests
+        run: npx playwright test ${{ github.event.inputs.testFile }} --reporter=html
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: playwright-report/
