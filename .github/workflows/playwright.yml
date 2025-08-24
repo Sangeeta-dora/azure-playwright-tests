@@ -35,6 +35,11 @@ jobs:
           cd azure-repo
           npm install
 
+      - name: Install Playwright Browsers
+        run: |
+          cd azure-repo
+          npx playwright install --with-deps    
+
       - name: Run Playwright Tests
         run: |
           cd azure-repo
