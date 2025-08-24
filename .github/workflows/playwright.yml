@@ -52,7 +52,7 @@ jobs:
         run: |
           cd azure-repo
           echo "::group::Running Playwright Tests"
-          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --output=playwright-report --workers=${{ github.event.inputs.workers }} --verbose
+          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --output=playwright-report --workers=${{ github.event.inputs.workers }}
           echo "::endgroup::"
 
       - name: Sanitize test file name
