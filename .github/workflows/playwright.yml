@@ -22,6 +22,7 @@ on:
 
 jobs:
   playwright-test:
+    name: Run Tests – ${{ github.event.inputs.testFile }}
     runs-on: ubuntu-latest
 
     steps:
@@ -54,7 +55,8 @@ jobs:
           npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=html --output=playwright-report --workers=${{ github.event.inputs.workers }}
 
       - name: Upload Playwright Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ github.event.inputs.testFile }}
           path: azure-repo/playwright-report
