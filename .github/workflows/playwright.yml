@@ -20,7 +20,7 @@ jobs:
       - name: Checkout Azure Repo
         uses: actions/checkout@v3
         with:
-          repository: <org>/<project>/_git/<repo-name>
+          repository: AnytimeCollect/Lockstep/_git/TestCases-ReactATC
           token: ${{ secrets.AZURE_PAT }}
           ref: ${{ github.event.inputs.branch }}
 
