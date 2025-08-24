@@ -22,7 +22,6 @@ on:
 
 jobs:
   playwright-test:
-    name: Run Tests – ${{ steps.sanitize.outputs.filename }}
     runs-on: ubuntu-latest
 
     steps:
@@ -55,10 +54,16 @@ jobs:
           echo "::group::Running Playwright Tests"
           npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --output=playwright-report --workers=${{ github.event.inputs.workers }} --verbose
           echo "::endgroup::"
+
+      - name: Sanitize test file name
+        id: sanitize
+        run: |
+          filename=$(basename "${{ github.event.inputs.testFile }}")
+          echo "filename=$filename" >> $GITHUB_OUTPUT   
           
       - name: Upload Playwright Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ github.event.inputs.testFile }}
+          name: playwright-report-${{ steps.sanitize.outputs.filename }}
           path: azure-repo/playwright-report
