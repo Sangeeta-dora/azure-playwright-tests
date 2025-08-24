@@ -1,42 +1,46 @@
-name: Run Playwright Tests (Azure Repo)
+name: Run Playwright Tests from Azure Repo
 
 on:
-  workflow_dispatch:   # allows manual run
+  workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch from Azure'
+        description: 'Branch from Azure DevOps'
         required: true
         default: 'main'
-      testFile:
-        description: 'Test file to run'
-        required: true
-        default: 'tests\Admin_MasterFiles_ActivityType.spec.js'
 
 jobs:
-  playwright-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Azure Repo
+      # 1. Checkout this GitHub repo (workflow lives here, no Azure code copied)
+      - name: Checkout GitHub Repo
         uses: actions/checkout@v3
-        with:
-          repository: AnytimeCollect/Lockstep/_git/TestCases-ReactATC/
-          token: ${{ secrets.AZURE_PAT }}
-          ref: ${{ github.event.inputs.branch }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # 2. Clone the Azure DevOps repo (temporary in runner VM)
+      - name: Clone Azure Repo
+        run: |
+          git clone --branch ${{ github.event.inputs.branch }} https://dev.azure.com/AnytimeCollect/Lockstep/_git/TestCases-ReactATC azure-repo
+        env:
+          GIT_ASKPASS: /bin/echo
+          GIT_USERNAME: Lockstep
+          GIT_PASSWORD: ${{ secrets.AZURE_PAT }}
 
+      # 3. Install dependencies
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd azure-repo
+          npm ci
 
+      # 4. Run Playwright tests with HTML report
       - name: Run Playwright Tests
-        run: npx playwright test ${{ github.event.inputs.testFile }} --reporter=html
+        run: |
+          cd azure-repo
+          npx playwright test --reporter=html --output=playwright-report
 
+      # 5. Upload report as artifact (downloadable)
       - name: Upload Playwright Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: playwright-report
-          path: playwright-report/
+          path: azure-repo/playwright-report
