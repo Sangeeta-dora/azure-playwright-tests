@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Clone Azure Repo
         run: |
-          git clone --branch ${{ github.event.inputs.branch }} https://dev.azure.com/AnytimeCollect/Lockstep/_git/TestCases-ReactATC azure-repo
+          git clone --branch ${{ github.event.inputs.branch }} https://AnytimeCollect:${{ secrets.AZURE_PAT }}@dev.azure.com/AnytimeCollect/Lockstep/_git/TestCases-ReactATC azure-repo
         env:
           GIT_ASKPASS: /bin/echo
           GIT_USERNAME: Lockstep   # usually your Azure DevOps org name
