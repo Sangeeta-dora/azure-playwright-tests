@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd azure-repo
-          npm ci
+          npm install
 
       - name: Run Playwright Tests
         run: |
