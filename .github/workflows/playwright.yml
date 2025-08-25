@@ -140,7 +140,6 @@ jobs:
           git add index.html
           git commit -m "Update reports index [skip ci]" || echo "No changes to commit"
           git push origin gh-pages
-        working-directory: gh-pages
 
       - name: Show Report URL
         run: |
