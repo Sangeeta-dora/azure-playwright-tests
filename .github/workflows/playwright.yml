@@ -58,7 +58,7 @@ jobs:
         run: |
           cd azure-repo
           echo "::group::Running Playwright Tests"
-          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --output=playwright-report --workers=${{ github.event.inputs.workers }} --retries=${{ github.event.inputs.retry }} || true
+          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --workers=${{ github.event.inputs.workers }} --retries=${{ github.event.inputs.retry }} || true
           echo "::endgroup::"
 
       - name: Generate Playwright HTML Report
