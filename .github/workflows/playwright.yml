@@ -101,9 +101,16 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+        
+          # Clone gh-pages branch into local folder
           git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+        
+          # Copy the latest report into gh-pages folder
+          cp -r azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }} gh-pages/
+        
           cd gh-pages
-
+        
+          # Rebuild index.html
           echo "<html><head><title>Playwright Reports</title>
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
@@ -115,7 +122,7 @@ jobs:
           </head><body>" > index.html
           echo "<h1>Playwright Reports</h1><table>" >> index.html
           echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> index.html
-
+        
           latest=1
           for dir in $(ls -d playwright-report-* 2>/dev/null | sort -r); do
             if [ -d "$dir" ]; then
@@ -129,11 +136,11 @@ jobs:
               fi
             fi
           done
-
+        
           echo "</table></body></html>" >> index.html
-
-          git add index.html
-          git commit -m "Update reports index [skip ci]" || echo "No changes to commit"
+        
+          git add .
+          git commit -m "Add new report and update index [skip ci]" || echo "No changes to commit"
           git push origin gh-pages
           
       - name: Show Report URL
