@@ -96,7 +96,47 @@ jobs:
           publish_dir: ./azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
           publish_branch: gh-pages
 
+      - name: Update Reports Index
+        if: always()
+        run: |
+          # Clone gh-pages branch
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
+          
+          cd gh-pages
+
+          # Create index.html with table
+          echo "<html><head><title>Playwright Reports</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; }
+            th { background-color: #f4f4f4; text-align: left; }
+          </style>
+          </head><body>" > index.html
+          echo "<h1>Playwright Reports</h1><table>" >> index.html
+          echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> index.html
+
+          # Add all reports (latest first)
+          for dir in $(ls -d playwright-report-* 2>/dev/null | sort -r); do
+            if [ -d "$dir" ]; then
+              timestamp=$(echo $dir | cut -d'-' -f4-)
+              testfile=$(echo $dir | cut -d'-' -f3)
+              echo "<tr><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+            fi
+          done
+
+          echo "</table></body></html>" >> index.html
+
+          # Commit & push changes
+          git add index.html
+          git commit -m "Update reports index [skip ci]" || echo "No changes to commit"
+          git push origin gh-pages
+
       - name: Show Report URL
         run: |
-          echo "Your report is available at:"
-          echo "https://${{ github.repository_owner }}.github.io/${{ github.repository }}/$(echo ${{ steps.report_folder.outputs.REPORT_DIR }})/index.html"
+          echo "Your latest report is available at:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.report_folder.outputs.REPORT_DIR }}/index.html"
+          echo "Full report history:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
