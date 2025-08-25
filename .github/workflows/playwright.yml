@@ -99,31 +99,38 @@ jobs:
       - name: Update Reports Index
         if: always()
         run: |
-          # Clone gh-pages branch
+          # Clone gh-pages branch into a folder
           git config user.name github-actions
           git config user.email github-actions@github.com
           git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
-          
+
           cd gh-pages
 
-          # Create index.html with table
+          # Create index.html with table + styling
           echo "<html><head><title>Playwright Reports</title>
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
             table { border-collapse: collapse; width: 100%; }
             th, td { border: 1px solid #ddd; padding: 8px; }
             th { background-color: #f4f4f4; text-align: left; }
+            tr.latest { background-color: #d4edda; font-weight: bold; } /* green highlight */
           </style>
           </head><body>" > index.html
           echo "<h1>Playwright Reports</h1><table>" >> index.html
           echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> index.html
 
           # Add all reports (latest first)
+          latest=1
           for dir in $(ls -d playwright-report-* 2>/dev/null | sort -r); do
             if [ -d "$dir" ]; then
               timestamp=$(echo $dir | cut -d'-' -f4-)
               testfile=$(echo $dir | cut -d'-' -f3)
-              echo "<tr><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+              if [ $latest -eq 1 ]; then
+                echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+                latest=0
+              else
+                echo "<tr><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+              fi
             fi
           done
 
@@ -133,6 +140,7 @@ jobs:
           git add index.html
           git commit -m "Update reports index [skip ci]" || echo "No changes to commit"
           git push origin gh-pages
+        working-directory: gh-pages
 
       - name: Show Report URL
         run: |
