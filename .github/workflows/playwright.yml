@@ -21,11 +21,11 @@ on:
       workers:
         description: 'Number of workers'
         required: false
-        default: '4'
+        default: '4'  
       retry:
         description: "Number of retries for failed tests (0 = no retries)"
         required: false
-        default: '0'
+        default: '0'   
 
 jobs:
   playwright-test:
@@ -53,7 +53,7 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           cd azure-repo
-          npx playwright install --with-deps
+          npx playwright install --with-deps    
 
       - name: Run Playwright Tests
         run: |
@@ -67,13 +67,13 @@ jobs:
           cd azure-repo
           echo "Report folder contents:"
           ls -l playwright-report
-
+          
       - name: Sanitize test file name
         id: sanitize
         run: |
           filename=$(basename "${{ github.event.inputs.testFile }}")
-          echo "filename=$filename" >> $GITHUB_OUTPUT
-
+          echo "filename=$filename" >> $GITHUB_OUTPUT   
+          
       - name: Version report folder
         id: report_folder
         run: |
@@ -82,19 +82,41 @@ jobs:
           mv azure-repo/playwright-report azure-repo/$report_dir
           echo "REPORT_DIR=$report_dir" >> $GITHUB_OUTPUT
 
-      - name: Upload Playwright Report Artifact
+      - name: Upload Playwright Report Artifact (full report)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report-${{ steps.sanitize.outputs.filename }}
           path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
 
-      - name: Build Reports Index
+      # 🚨 New cleanup step
+      - name: Strip heavy files before deploying to Pages
         if: always()
         run: |
-          cd azure-repo
-          INDEX="index.html"
+          cd azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
+          echo "Removing videos and trace zips before GitHub Pages deploy..."
+          find . -type f -name "*.webm" -print -delete
+          find . -type f -name "*.zip" -print -delete
 
+      - name: Deploy Playwright Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
+          publish_branch: gh-pages
+
+      - name: Update Reports Index
+        if: always()
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+        
+          git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          cp -r azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }} gh-pages/
+        
+          cd gh-pages
+        
           echo "<html><head><title>Playwright Reports</title>
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
@@ -103,35 +125,30 @@ jobs:
             th { background-color: #f4f4f4; text-align: left; }
             tr.latest { background-color: #d4edda; font-weight: bold; }
           </style>
-          </head><body>" > $INDEX
-          echo "<h1>Playwright Reports</h1><table>" >> $INDEX
-          echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> $INDEX
-
+          </head><body>" > index.html
+          echo "<h1>Playwright Reports</h1><table>" >> index.html
+          echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> index.html
+        
           latest=1
           for dir in $(ls -d playwright-report-* 2>/dev/null | sort -r); do
             if [ -d "$dir" ]; then
               timestamp=$(echo $dir | cut -d'-' -f4-)
               testfile=$(echo $dir | cut -d'-' -f3)
               if [ $latest -eq 1 ]; then
-                echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> $INDEX
+                echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
                 latest=0
               else
-                echo "<tr><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> $INDEX
+                echo "<tr><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
               fi
             fi
           done
-
-          echo "</table></body></html>" >> $INDEX
-
-      - name: Deploy Playwright Report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./azure-repo
-          publish_branch: gh-pages
-          keep_files: true   # 👈 keep older reports
-
+        
+          echo "</table></body></html>" >> index.html
+        
+          git add .
+          git commit -m "Add new report and update index [skip ci]" || echo "No changes to commit"
+          git push origin gh-pages
+          
       - name: Show Report URL
         run: |
           echo "Your latest report is available at:"
