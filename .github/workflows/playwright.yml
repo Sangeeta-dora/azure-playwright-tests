@@ -1,5 +1,7 @@
 name: Run Playwright Tests (Azure Repo)
 
+permissions:
+  contents: write
 on:
   workflow_dispatch:   # allows manual run
     inputs:
