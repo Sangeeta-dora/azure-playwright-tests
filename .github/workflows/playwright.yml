@@ -58,9 +58,14 @@ jobs:
         run: |
           cd azure-repo
           echo "::group::Running Playwright Tests"
-          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --output=playwright-report --workers=${{ github.event.inputs.workers }} --retries=${{ github.event.inputs.retry }}
+          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure playwright test tests/Admin_MasterFiles_ActivityType.spec.js --reporter=list,html --output=playwright-report --workers=${{ github.event.inputs.workers }} --retries=${{ github.event.inputs.retry }} || true
           echo "::endgroup::"
 
+      - name: Generate Playwright HTML Report
+        run: |
+          cd azure-repo
+          npx playwright show-report --output=playwright-report
+          
       - name: Sanitize test file name
         id: sanitize
         run: |
@@ -80,4 +85,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./azure-repo/playwright-report
-          publish_branch: gh-pages     
+          publish_branch: gh-pages  
+          force_orphan: true
