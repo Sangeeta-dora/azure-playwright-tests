@@ -12,7 +12,7 @@ on:
       testFile:
         description: 'Test file to run'
         required: true
-        default: 'tests\Admin_MasterFiles_ActivityType.spec.js'
+        default: 'tests/Admin_MasterFiles_ActivityType.spec.js'
       environment:     # 👈 dropdown/input field when triggering
         description: "Environment to run tests against"
         required: true
