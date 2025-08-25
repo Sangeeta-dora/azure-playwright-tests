@@ -73,18 +73,30 @@ jobs:
           filename=$(basename "${{ github.event.inputs.testFile }}")
           echo "filename=$filename" >> $GITHUB_OUTPUT   
           
-      - name: Upload Playwright Report
+      - name: Version report folder
+        id: report_folder
+        run: |
+          timestamp=$(date +%Y%m%d-%H%M%S)
+          report_dir="playwright-report-${{ steps.sanitize.outputs.filename }}-$timestamp"
+          mv azure-repo/playwright-report azure-repo/$report_dir
+          echo "REPORT_DIR=$report_dir" >> $GITHUB_OUTPUT
+
+      - name: Upload Playwright Report Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report-${{ steps.sanitize.outputs.filename }}
-          path: azure-repo/playwright-report
+          path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
 
       - name: Deploy Playwright Report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./azure-repo/playwright-report
-          publish_branch: gh-pages  
-          force_orphan: true
+          publish_dir: ./azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
+          publish_branch: gh-pages
+
+      - name: Show Report URL
+        run: |
+          echo "Your report is available at:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.repository }}/$(echo ${{ steps.report_folder.outputs.REPORT_DIR }})/index.html"
