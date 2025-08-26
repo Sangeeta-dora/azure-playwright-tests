@@ -68,18 +68,29 @@ jobs:
             --retries=${{ github.event.inputs.retry }} || true
           echo "::endgroup::"
 
-      - name: Generate Allure Report
+      - name: Debug allure-results
         run: |
           cd azure-repo
-          npx allure generate ./allure-results --clean -o allure-report
-          ls -l allure-report
+          echo "Contents of allure-results:"
+          ls -R allure-results || echo "No allure-results folder found!"
 
       - name: Sanitize test file name
         id: sanitize
         run: |
           filename=$(basename "${{ github.event.inputs.testFile }}")
           echo "filename=$filename" >> $GITHUB_OUTPUT   
-          
+
+      - name: Generate Allure Report
+        run: |
+          cd azure-repo
+          # Restore history for trend graphs if it exists
+          if [ -d "../gh-pages/latest/history" ]; then
+            echo "Restoring previous history for trends..."
+            cp -r ../gh-pages/latest/history ./allure-results/
+          fi
+          npx allure generate ./allure-results --clean -o allure-report
+          ls -l allure-report
+
       - name: Version report folder
         id: report_folder
         run: |
@@ -95,27 +106,23 @@ jobs:
           name: allure-report-${{ steps.sanitize.outputs.filename }}
           path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
 
-      - name: Deploy Allure Report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
-          publish_branch: gh-pages
-
       - name: Update Reports Index
         if: always()
         run: |
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-
-          # Clone the gh-pages branch
+          
           git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
-
           cd gh-pages
-          # Copy report folder inside cloned repo (keeping .git safe)
-          cp -r ../azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }} ./
 
+          # Copy new report
+          cp -r ../azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }} ./
+          
+          # Update 'latest' alias
+          rm -rf latest
+          cp -r ${{ steps.report_folder.outputs.REPORT_DIR }} latest
+
+          # (Re)build index.html
           echo "<html><head><title>Allure Reports</title>
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
@@ -147,7 +154,7 @@ jobs:
           git add .
           git commit -m "Add new allure report and update index [skip ci]" || echo "No changes to commit"
           git push origin gh-pages
-          
+
       - name: Show Allure Report URL
         run: |
           echo "Your latest Allure report is available at:"
