@@ -1,2 +1,0 @@
-description value: Updated Test Issue Description
-attachInvoiceExternal value: false
