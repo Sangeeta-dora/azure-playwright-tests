@@ -1,0 +1,232 @@
+# Test info
+
+- Name: Activity Template_Validate Maintain Reports Field
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityTemplate.spec.js:178:1
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 360000ms exceeded.
+Call log:
+  - waiting for locator('//ul[@role="listbox"]//li[contains(text(),"Tagged Invoices - EN")]')
+    - locator resolved to <li tabindex="-1" role="option" data-value="4013" aria-selected="false" class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-1dsdfb">…</li>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div>…</div> from <div aria-hidden="true">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    633 × waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <div>…</div> from <div aria-hidden="true">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+
+    at Admin_MasterFiles_ActivityTemplate.fillReportDetails (/home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/PageObjects/Admin_MasterFiles_ActivityTemplate.js:339:96)
+    at /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityTemplate.spec.js:201:5
+```
+
+# Page snapshot
+
+```yaml
+- listbox "Select User to Assign":
+  - option "Collections Letter - EN"
+  - option "Customer Communication Details"
+  - option "Invoice - EN"
+  - option "NA Open Invoice - EN"
+  - option "NA Statement - EN"
+  - option "NA Statement EOM - EN"
+  - option "Open Invoice - EN"
+  - option "Open Invoice By Contact - EN"
+  - option "Past Due Notice - EN"
+  - option "Statement - EN"
+  - option "Statement EOM - EN"
+  - option "Statement History - EN"
+  - option "Tagged Invoices - EN"
+```
+
+# Test source
+
+```ts
+  239 |
+  240 |         return isSelected
+  241 |     }
+  242 |
+  243 |     //To return true if the page navigation is working fine else false
+  244 |     async validatePageNavigation(){
+  245 |
+  246 |         await this.addNewRecordsIfNeeded()
+  247 |         await this.pageNo_1.click()
+  248 |         
+  249 |         if(this.isPageSelected('button[aria-label*="page 1"]')){
+  250 |             console.log("Page 1 is selected")
+  251 |         }
+  252 |         else{
+  253 |             return false;
+  254 |         }
+  255 |     
+  256 |         await this.gotoNextPage.click()
+  257 |         if(this.isPageSelected('button[aria-label*="page 2"]')){
+  258 |             console.log("clicked on next page btn and Page 2 is selected now")
+  259 |         }
+  260 |         else{
+  261 |             return false;
+  262 |         }
+  263 |         await this.gotoPreviousPage.click()
+  264 |         if(this.isPageSelected('button[aria-label*="page 1"]')){
+  265 |             console.log("clicked on previous page btn and Page 1 is selected now")
+  266 |         }
+  267 |         else{
+  268 |             return false
+  269 |         }
+  270 |         return true
+  271 |     }
+  272 |
+  273 |     //To return true if the search functionality is working fine for text fields else false
+  274 |     async validateSearchFunctionalityTextvalue(datafieldvalue, searchvalue){
+  275 |         await this.page.locator(`//div[@data-field="${datafieldvalue}" and @role="columnheader"]//input`).fill(searchvalue)
+  276 |         await this.page.locator(`//div[@data-field="${datafieldvalue}" and @role="columnheader"]//input`).press('Enter')
+  277 |         await this.page.waitForTimeout(5000)
+  278 |         // Get the locator for the elements
+  279 |         const searchResultsLocator = this.page.locator(`//div[@data-field="${datafieldvalue}" and @role="cell"]//div`)
+  280 |     
+  281 |         // Get the count of elements
+  282 |         const count = await searchResultsLocator.count();
+  283 |         console.log(`Number of search results for ${datafieldvalue} is: ${count}`)
+  284 |
+  285 |         // Loop through the elements
+  286 |         for (let i = 0; i < count; i++) {
+  287 |             const element = searchResultsLocator.nth(i)
+  288 |             const elementText = await element.textContent()
+  289 |             console.log(`Element ${i + 1} text: ${elementText}`)
+  290 |             if (elementText !== searchvalue) {
+  291 |                 return false;
+  292 |             }
+  293 |         }
+  294 |         await this.clearquicksearchFilter.click()
+  295 |         return true;
+  296 |     }
+  297 |
+  298 |     //To return true if the search functionality is working fine for checkbox else false
+  299 |     async validateSelectFunctionalityCheckbox(datafieldvalue, searchvalue){
+  300 |         const booleanSearchValue = (str) => str.toLowerCase() === 'true';
+  301 |         console.log("string to boolean: "+booleanSearchValue(searchvalue))
+  302 |         await this.page.locator(`//div[@data-field="${datafieldvalue}" and @role="columnheader"]//select`).click()
+  303 |         await this.page.waitForTimeout(5000)
+  304 |         await this.page.locator(`//div[@data-field="${datafieldvalue}" and @role="columnheader"]//select`).selectOption(searchvalue)
+  305 |         await this.page.waitForTimeout(5000)
+  306 |         // Get the locator for the elements
+  307 |         const searchResultsLocator = this.page.locator(`//div[@data-field="${datafieldvalue}" and @role="cell"]//input`);
+  308 |
+  309 |         // Get the count of elements
+  310 |         const count = await searchResultsLocator.count()
+  311 |         console.log(`Number of search results for ${datafieldvalue} is: ${count}`)
+  312 |
+  313 |         // Loop through the elements
+  314 |         for (let i = 0; i < count; i++) {
+  315 |             const element = searchResultsLocator.nth(i)
+  316 |             const iselementchecked = await element.isChecked()
+  317 |             console.log(`Element ${i + 1} is checked: ${iselementchecked}`)
+  318 |             if (iselementchecked != booleanSearchValue(searchvalue)) {
+  319 |                 return false
+  320 |             }
+  321 |         }
+  322 |         await this.clearquicksearchFilter.click()
+  323 |         return true
+  324 |     }
+  325 |
+  326 |     //To Click on Maintain Reports button
+  327 |     async clickOnMaintainReports(){
+  328 |         await this.maintainReportbtn.click()
+  329 |     }
+  330 |
+  331 |     //To click on Add new report button
+  332 |     async clickOnAddNewReport() {
+  333 |         await this.addNewReportbtn.click()
+  334 |     }
+  335 |
+  336 |     //To fill the report details
+  337 |     async fillReportDetails(reporttype, reportname, reportdesc){
+  338 |         await this.reportBasedrpdwn.click()
+> 339 |         await this.page.locator(`//ul[@role="listbox"]//li[contains(text(),"${reporttype}")]`).click()
+      |                                                                                                ^ Error: locator.click: Test timeout of 360000ms exceeded.
+  340 |         await this.reportName.fill(reportname)
+  341 |         await this.reportDesc.fill(reportdesc)
+  342 |     }
+  343 |
+  344 |     //To Click on Submit button- Reports
+  345 |     async clickOnSubmitReport(){
+  346 |         await this.submitReportbtn.click()
+  347 |     }
+  348 |
+  349 |     //To search report
+  350 |     async searchReport_Reports(reportname){
+  351 |         await this.reportNameSearchbox.fill(reportname)
+  352 |         await this.reportNameSearchbox.press('Enter')
+  353 |         await this.page.waitForTimeout(5000)
+  354 |     }
+  355 |
+  356 |     //To return the value of the report name
+  357 |     async returnReportName_Reports() {
+  358 |         console.log("report name: "+ await this.reportNameCellvalue.textContent())
+  359 |         return await this.reportNameCellvalue.textContent()
+  360 |     }
+  361 |
+  362 |     //To Close Maintain Reports popup
+  363 |     async closeMaintainReportspopup() {
+  364 |         await this.closeMaintainReportspopupbtn.click()
+  365 |     }
+  366 |
+  367 |     //To click on Sync button- Reports
+  368 |     async clickOnMaintainReportSyncbtn() {
+  369 |         await this.maintainReportSyncbtn.click()
+  370 |         await this.page.waitForTimeout(5000) 
+  371 |     }
+  372 |
+  373 |     //To Verify if the newly added report is present in the report dropdown
+  374 |     async validateNewlyAddedReport(reportname){
+  375 |         await this.reportNamedrpdwn.click()
+  376 |          // Get the locator for the elements
+  377 |          const searchResultsLocator = this.reportNamedrpdwnvalues
+  378 |
+  379 |          // Get the count of elements
+  380 |          const count = await searchResultsLocator.count()
+  381 |          console.log(`Number of search results for report is: ${count}`)
+  382 |  
+  383 |          // Loop through the elements
+  384 |          for (let i = 0; i < count; i++) {
+  385 |              const element = searchResultsLocator.nth(i);
+  386 |              var elementtext = await element.textContent();
+  387 |              console.log(`Element ${i + 1} name: ${elementtext}`)
+  388 |              if (elementtext == reportname) {
+  389 |                 console.log("Report is present in the dropdown: "+elementtext)
+  390 |                 await element.click()
+  391 |                 return true
+  392 |              }
+  393 |          }
+  394 |          return false
+  395 |     }
+  396 |
+  397 |     //To click on delete icon- Reports
+  398 |     async clickOnDeleteIconReports(){
+  399 |         await this.deleteIconReports.click()
+  400 |         await this.deleteIconReports_Okbtn.click()
+  401 |         await this.deletepopupText.waitFor({ state: 'hidden' })
+  402 |         await this.page.waitForTimeout(5000)
+  403 |     }
+  404 |
+  405 |     //To click on Maintain Templates button
+  406 |     async clickOnMaintainCommunicationTemplates(){
+  407 |         await this.maintainCommunicationTemplates.click()
+  408 |     }
+  409 |
+  410 | }
+```
