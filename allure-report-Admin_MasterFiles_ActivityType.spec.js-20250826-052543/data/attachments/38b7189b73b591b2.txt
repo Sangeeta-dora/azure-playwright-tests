@@ -1,0 +1,369 @@
+# Test info
+
+- Name: Activity Type_Create Activity Type with Mandatory fields
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityType.spec.js:155:1
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 360000ms exceeded.
+Call log:
+  - waiting for locator('//*[local-name()="svg" and @data-testid="DeleteIcon"]')
+    - locator resolved to <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="Delete" data-testid="DeleteIcon" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv">…</svg>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="true" class="MuiBackdrop-root MuiModal-backdrop css-919eu4"></div> from <div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root css-1m8tze4">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="true" class="MuiBackdrop-root MuiModal-backdrop css-919eu4"></div> from <div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root css-1m8tze4">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    658 × waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <div aria-hidden="true" class="MuiBackdrop-root MuiModal-backdrop css-919eu4"></div> from <div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root css-1m8tze4">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+
+    at Admin_MasterFiles_ActivityTemplate.clickOnDeleteIcon (/home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/PageObjects/Admin_MasterFiles_ActivityTemplate.js:160:31)
+    at /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityType.spec.js:185:44
+```
+
+# Page snapshot
+
+```yaml
+- heading "Add Activity Type" [level=5]
+- text: Activity Base
+- button "Select User to Assign ExpectPay": ExpectPay
+- text: Activity ID
+- textbox "Activity ID": TestAct_ID_842
+- text: Description
+- textbox "Description": Test_desc_1
+- text: Display Priority
+- spinbutton "Display Priority": "4"
+- checkbox "System Activity" [disabled]
+- text: System Activity
+- checkbox "Exclude From Dashboard"
+- text: Exclude From Dashboard
+- checkbox "Exclude From CRM"
+- text: Exclude From CRM
+- checkbox "Active"
+- text: Active
+- button "Submit"
+- button "Cancel"
+- heading "ProcNote" [level=6]
+- list:
+  - listitem:
+    - button "Bold":
+      - img
+  - listitem:
+    - button "Italic":
+      - img
+  - listitem:
+    - button "Underline":
+      - img
+  - listitem:
+    - button "Strike":
+      - img
+  - listitem:
+    - button "Indent":
+      - img
+  - listitem:
+    - button "Outdent" [disabled]:
+      - img
+- list:
+  - listitem:
+    - button "Quote":
+      - img
+- list:
+  - listitem:
+    - button "Align":
+      - img
+- list:
+  - listitem:
+    - button "Subscript":
+      - img
+  - listitem:
+    - button "Superscript":
+      - img
+- list:
+  - listitem:
+    - button "Remove Format":
+      - img
+- list:
+  - listitem:
+    - button "Horizontal line":
+      - img
+- list:
+  - listitem:
+    - button "Font":
+      - text: Font
+      - img
+  - listitem:
+    - button "Size":
+      - text: Size
+      - img
+  - listitem:
+    - button "Formats":
+      - text: Formats
+      - img
+- list:
+  - listitem:
+    - button "Font Color":
+      - img
+  - listitem:
+    - button "Highlight Color":
+      - img
+- list:
+  - listitem:
+    - button "Select All, Ctrl + A":
+      - img
+  - listitem:
+    - button "Cut, Ctrl + X":
+      - img
+  - listitem:
+    - button "Copy, Ctrl + C":
+      - img
+  - listitem:
+    - button "Paste, Ctrl + V":
+      - img
+  - listitem:
+    - button "Undo" [disabled]:
+      - img
+  - listitem:
+    - button "Redo" [disabled]:
+      - img
+- list:
+  - listitem:
+    - button "List":
+      - img
+- list:
+  - listitem:
+    - button "Full screen":
+      - img
+- list:
+  - listitem:
+    - button "print":
+      - img
+  - listitem:
+    - button "Preview":
+      - img
+- text: Please type here...
+- paragraph
+- textbox
+```
+
+# Test source
+
+```ts
+   60 |         this.reportform= page.locator('//h5[contains(text(),"Report Form")]')
+   61 |         this.reportBasedrpdwn= page.locator('//div[@id="mui-component-select-systemReportKey"]')
+   62 |         this.reportName= page.locator('//input[@name="reportName"]')
+   63 |         this.reportDesc= page.locator('//input[@name="buttonText"]')
+   64 |         this.submitReportbtn= page.locator('(//button[@type="submit"])[2]')
+   65 |         this.reportNameSearchbox= page.locator('//div[@aria-labelledby="draggable-dialog-title"]//div[@data-field="reportName" and @role="columnheader"]//input')
+   66 |         this.reportNameCellvalue= page.locator('//div[@aria-labelledby="draggable-dialog-title"]//div[@data-field="reportName" and @role="cell"]//div')
+   67 |         this.closeMaintainReportspopupbtn= page.locator('//button[@title="Close"]')
+   68 |         this.maintainReportSyncbtn= page.locator('//button[contains(text(),"Maintain Reports")]//preceding-sibling::button')
+   69 |         this.reportNamedrpdwnvalues= page.locator('//ul[@role="listbox"]//li')
+   70 |         this.deleteIconReports= page.locator('//div[@aria-labelledby="draggable-dialog-title"]//*[local-name()="svg" and @data-testid="DeleteIcon"]')
+   71 |         this.deleteIconReports_Okbtn= page.locator('//div[@aria-labelledby="draggable-dialog-title"]//button[contains(text(),"OK")]')
+   72 |         this.deletepopupText= page.locator('//div[@aria-labelledby="draggable-dialog-title"]//h6[contains(text(),"Are you sure?")]')
+   73 |
+   74 |         //Maintain Communication Template locators
+   75 |         this.maintainCommunicationTemplates= page.locator('//button[contains(text(),"Maintain Templates")]')
+   76 |         //this.templatepage= page.locator('//div[@class="dialog-title__text m-2"]')
+   77 |
+   78 |     }
+   79 |
+   80 |      //To return the page name
+   81 |      async returnPageName(){
+   82 |         return this.activityTemplate.textContent()
+   83 |     }
+   84 |
+   85 |     //To click on add new record button- Activity Template
+   86 |     async clickOnAddNewRecord(){
+   87 |         await this.addNewRecordbtn.click()
+   88 |     }
+   89 |
+   90 |     //To fill the activity template details
+   91 |     async fillActivityTemplateDetails(activitytemp_name, issueDesc, pritority, communicationNotes, reportName, emailTemplate_name, reasonCode, limitAttchmentsTo, reportDefaulttype){ 
+   92 |         await this.activityTemplatetxtbx.fill(activitytemp_name)
+   93 |         await this.issueDesctxtbx.fill(issueDesc)
+   94 |         await this.pritority.fill(pritority)
+   95 |         await this.communicationNotes.fill(communicationNotes)
+   96 |         await this.reportNamedrpdwn.click()
+   97 |         await this.page.locator(`//li[text()="${reportName}"]`).click()
+   98 |         await this.emailTemplate.click()
+   99 |         await this.emailTemplate.fill(emailTemplate_name)
+  100 |         await this.page.getByRole('option').getByText(`${emailTemplate_name}`, { exact: true }).click();
+  101 |        // await this.page.getByText(`${emailTemplate_name}`, { exact: true }).first().press('Enter')
+  102 |         await this.reasonCodedrpdwn.click()
+  103 |         await this.page.getByRole('option', { name: `${reasonCode}` }).click()
+  104 |         await this.attachInvoicechbx.click()
+  105 |         await this.attachExtInvoicechkbx.click()
+  106 |         await this.limitattachmentchknx.click()
+  107 |         await this.limitAttchmentsTo.fill(limitAttchmentsTo)  
+  108 |         await this.custContactchkbx.click()
+  109 |         await this.tagbyInvoiceContact.click()
+  110 |         await this.tagbyInvoiceCOntact2.click()
+  111 |         await this.reportDefaultdrpdwn.click()
+  112 |         await this.page.getByRole('option', { name: `${reportDefaulttype}` }).click()
+  113 |     }
+  114 |
+  115 |     //To fill the activity template details with mandatory fields only
+  116 |     async fillOnlyMandatoryFields(activitytemp_name, setpriority, issuedesc){
+  117 |         await this.activityTemplatetxtbx.fill(activitytemp_name)
+  118 |         await this.issueDesctxtbx.fill(issuedesc)
+  119 |         await this.pritority.fill(setpriority)
+  120 |     }
+  121 |
+  122 |     //To click on Submit button- Activity Template
+  123 |     async clickOnSubmitActivityTemplate(){
+  124 |         await this.submitbtn.click()
+  125 |     }
+  126 |
+  127 |      //To search activity template
+  128 |      async searchActivityTemplate(activitytemp_name){
+  129 |         await this.searchContainer_ActivityTemplate.fill(activitytemp_name)
+  130 |         await this.searchContainer_ActivityTemplate.press('Enter')
+  131 |         await this.page.waitForTimeout(5000)
+  132 |     }
+  133 |
+  134 |     //To return text cell value of the first row after search
+  135 |     async returnFirstRowCellValue_texttype(datafieldname){
+  136 |         console.log(`${datafieldname} value: `+ await this.page.locator(`//div[@data-field="${datafieldname}" and @role="cell"]//div`).textContent())
+  137 |         return await this.page.locator(`//div[@data-field="${datafieldname}" and @role="cell"]//div`).textContent()
+  138 |     }
+  139 |
+  140 |     //To return checkbox cell value of the first row after search
+  141 |     async returnFirstRowCellValue_checkboxtype(datafieldname){
+  142 |         console.log(`${datafieldname} value: `+ await this.page.locator(`//div[@data-field="${datafieldname}" and @role="cell"]//input`).isChecked())
+  143 |         return await this.page.locator(`//div[@data-field="${datafieldname}" and @role="cell"]//input`).isChecked()
+  144 |     }
+  145 |
+  146 |     //To click on edit icon
+  147 |     async clickOnEditIcon(){
+  148 |         await this.editIcon.click();
+  149 |         await this.page.waitForTimeout(5000)
+  150 |     }
+  151 |
+  152 |     //To edit the fields (Issue Description and Attach External Invoice checkbox)
+  153 |     async editFields(issuedesc){
+  154 |         await this.issueDesctxtbx.fill(issuedesc)
+  155 |         await this.attachExtInvoicechkbx.uncheck()
+  156 |     }
+  157 |
+  158 |     //To click on delete icon- Activity Template
+  159 |     async clickOnDeleteIcon(){
+> 160 |         await this.deleteIcon.click();
+      |                               ^ Error: locator.click: Test timeout of 360000ms exceeded.
+  161 |         await this.deleteIcon_Okbtn.click()
+  162 |         await this.page.waitForTimeout(5000)
+  163 |     }
+  164 |
+  165 |     //To return the error text when trying to delete a record which is in use
+  166 |     async returnDeleteErrorValidation(){
+  167 |         return this.deleteError.textContent()
+  168 |     }
+  169 |
+  170 |     //To return validation message when mandatory field 'Activity Template' is not filled
+  171 |     async returnIsActivityTemp_MandatoryField(){
+  172 |         console.log("Mandatory field Validation message for Activity template: "+ await this.activityNameMandatoryError.textContent())
+  173 |         return this.activityNameMandatoryError.isVisible()
+  174 |     }
+  175 |
+  176 |     //To return validation message when mandatory field 'Priority' is not filled
+  177 |     async returnIsPriority_MandatoryField(){ 
+  178 |         console.log("Mandatory field Validation message for Priority: "+ await this.priorityMandatoryError.textContent())
+  179 |         return this.priorityMandatoryError.isVisible()
+  180 |     }
+  181 |
+  182 |     //To return validation message when mandatory field 'Issue Description' is not filled
+  183 |     async returnIsDescription_MandatoryField(){
+  184 |         console.log("Mandatory field Validation message for Description: "+ await this.issuedescMandatoryError.textContent())
+  185 |         return this.issuedescMandatoryError.isVisible()
+  186 |     }
+  187 |
+  188 |     //To add few more activity templates if the records on page are less than or equal to 20
+  189 |     async addNewRecordsIfNeeded(){
+  190 |         await this.rowsPerPagedrpdwn.click()
+  191 |         await this.pageSize_20.click()
+  192 |
+  193 |         var total_records= await this.total_recordsNo.textContent()
+  194 |
+  195 |         if(total_records.split(" ")[2] <= 20){
+  196 |             var addnewrecords= 21 - total_records.split(" ")[2] 
+  197 |             console.log("adding few more records: "+addnewrecords)
+  198 |             for(let i=0; i<addnewrecords; i++){
+  199 |                 var activitytempname = 'Activity temp_'+ Math.floor(Math.random() * 1000)
+  200 |                 await this.clickOnAddNewRecord()
+  201 |                 await this.fillOnlyMandatoryFields(activitytempname, "1", 'Test Issue Description')
+  202 |                 await this.clickOnSubmitActivityTemplate()
+  203 |             }
+  204 |         }
+  205 |     }
+  206 |
+  207 |     //To return true if the Records per page functionality is working fine esle false
+  208 |     async validateRecordsPerPage(){
+  209 |         await this.addNewRecordsIfNeeded()
+  210 |         var total_records= await this.total_recordsNo.textContent()
+  211 |         console.log("Records on page before resize: "+(total_records.split(" ")[0]).split("–")[1])
+  212 |
+  213 |         //Resizing the records per page to 50
+  214 |         await this.rowsPerPagedrpdwn.click()
+  215 |         await this.pageSize_50.click()
+  216 |
+  217 |         var new_total_records= await this.total_recordsNo.textContent()
+  218 |         var newpagesize= (new_total_records.split(" ")[0]).split("–")[1]
+  219 |         console.log("Records on page after resize: "+newpagesize)
+  220 |         
+  221 |         //Validating if the records per page is resized to 50
+  222 |         if(20<newpagesize && newpagesize<=50){
+  223 |             return true 
+  224 |         }
+  225 |         else{
+  226 |             return false
+  227 |         }
+  228 |     }
+  229 |
+  230 |     //To check and return if page is selected
+  231 |     async isPageSelected(selector) {
+  232 |         // Check if the button has a specific class or attribute that indicates it is selected
+  233 |         const isSelected = await this.page.evaluate((selector) => {
+  234 |             const button = document.querySelector(selector);
+  235 |             if (!button) return false;
+  236 |             // Or check for an attribute
+  237 |             return button.getAttribute('aria-pressed') === 'true';
+  238 |         }, selector);
+  239 |
+  240 |         return isSelected
+  241 |     }
+  242 |
+  243 |     //To return true if the page navigation is working fine else false
+  244 |     async validatePageNavigation(){
+  245 |
+  246 |         await this.addNewRecordsIfNeeded()
+  247 |         await this.pageNo_1.click()
+  248 |         
+  249 |         if(this.isPageSelected('button[aria-label*="page 1"]')){
+  250 |             console.log("Page 1 is selected")
+  251 |         }
+  252 |         else{
+  253 |             return false;
+  254 |         }
+  255 |     
+  256 |         await this.gotoNextPage.click()
+  257 |         if(this.isPageSelected('button[aria-label*="page 2"]')){
+  258 |             console.log("clicked on next page btn and Page 2 is selected now")
+  259 |         }
+  260 |         else{
+```

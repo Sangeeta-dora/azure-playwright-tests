@@ -1,0 +1,3 @@
+Number of search results for activityID is: 2
+Element 1 text: TestAct_ID_84
+Element 2 text: TestAct_ID_842
