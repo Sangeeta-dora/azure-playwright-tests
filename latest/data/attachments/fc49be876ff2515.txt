@@ -1,0 +1,14 @@
+ruleViolationID value: Activity_temp_732
+priority value: 1
+description value: Test Issue Description
+longDescription value: Test Communication Notes
+reportName value: Collections Letter - EN
+emailTemplateID value: First Reminder
+disputeCode value: Missing PO
+limitOfAttachments value: 2
+reportDefaultOutputText value: PDF
+attachInvoices value: true
+attachInvoiceExternal value: true
+isCustContact value: true
+invoiceContactTagging value: true
+invoiceContact2Tagging value: true

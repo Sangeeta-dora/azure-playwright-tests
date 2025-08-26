@@ -1,0 +1,3 @@
+Mandatory field Validation message for Activity template: Rule Action ID blank or already exists
+Mandatory field Validation message for Priority: Priority must be a valid number
+Mandatory field Validation message for Description: Issue Description Required
