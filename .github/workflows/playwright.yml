@@ -26,16 +26,15 @@ on:
       workers:
         description: 'Number of workers'
         required: false
-        default: '4'  
+        default: '4'
       retry:
         description: "Number of retries for failed tests (0 = no retries)"
         required: false
-        default: '0'   
+        default: '0'
 
 jobs:
   playwright-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Clone Azure Repo
         run: |
@@ -59,7 +58,7 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           cd azure-repo
-          npx playwright install --with-deps    
+          npx playwright install --with-deps
 
       - name: Run Playwright Tests with Allure
         run: |
@@ -72,28 +71,25 @@ jobs:
             --retries=${{ github.event.inputs.retry }} || true
           echo "::endgroup::"
 
-      - name: Debug allure-results
-        run: |
-          cd azure-repo
-          echo "Contents of allure-results:"
-          ls -R allure-results || echo "No allure-results folder found!"
-
       - name: Sanitize test file name
         id: sanitize
         run: |
           filename=$(basename "${{ github.event.inputs.testFile }}")
-          echo "filename=$filename" >> $GITHUB_OUTPUT   
+          echo "filename=$filename" >> $GITHUB_OUTPUT
 
       - name: Generate Allure Report
         run: |
           cd azure-repo
           # Restore history for trend graphs if it exists
           if [ -d "../gh-pages/latest/history" ]; then
-            echo "Restoring previous history for trends..."
             cp -r ../gh-pages/latest/history ./allure-results/
           fi
           npx allure generate ./allure-results --clean -o allure-report
-          ls -l allure-report
+
+      - name: Remove large attachments
+        run: |
+          cd azure-repo/allure-report
+          find . -type f -name "*.zip" -size +50M -exec rm -v {} \;
 
       - name: Version report folder
         id: report_folder
@@ -115,27 +111,19 @@ jobs:
         run: |
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-          
+
           git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
           cd gh-pages
 
-          # Copy new report
-          cp -r ../azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }} ./
-          
+          # Copy new report (skip very large files)
+          rsync -av --max-size='50M' ../azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}/ ./${{ steps.report_folder.outputs.REPORT_DIR }}/
+
           # Update 'latest' alias
           rm -rf latest
           cp -r ${{ steps.report_folder.outputs.REPORT_DIR }} latest
 
-          # (Re)build index.html
-          echo "<html><head><title>Allure Reports</title>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 20px; }
-            table { border-collapse: collapse; width: 100%; }
-            th, td { border: 1px solid #ddd; padding: 8px; }
-            th { background-color: #f4f4f4; text-align: left; }
-            tr.latest { background-color: #d4edda; font-weight: bold; }
-          </style>
-          </head><body>" > index.html
+          # Rebuild index.html
+          echo "<html><head><title>Allure Reports</title><style>body{font-family:Arial,sans-serif;padding:20px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}th{background-color:#f4f4f4;text-align:left}tr.latest{background-color:#d4edda;font-weight:bold}</style></head><body>" > index.html
           echo "<h1>Allure Reports</h1><table>" >> index.html
           echo "<tr><th>Timestamp</th><th>Test File</th><th>Environment</th><th>Report Link</th></tr>" >> index.html
 
@@ -153,7 +141,6 @@ jobs:
               fi
             fi
           done
-
           echo "</table></body></html>" >> index.html
 
           git add .
