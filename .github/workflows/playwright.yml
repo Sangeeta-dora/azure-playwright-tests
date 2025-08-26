@@ -1,8 +1,5 @@
 name: Run Playwright Tests (Azure Repo with Allure Reports)
 
-# 👇 Dynamic run name for GitHub Actions UI
-run-name: "Playwright: ${{ replace(replace(github.event.inputs.testFile, 'tests/', ''), '.spec.js', '') }} [${{ github.event.inputs.environment }}]"
-
 permissions:
   contents: write
 
@@ -37,6 +34,7 @@ on:
 
 jobs:
   playwright-test:
+    name: "Playwright: ${{ replace(replace(github.event.inputs.testFile, 'tests/', ''), '.spec.js', '') }} [${{ github.event.inputs.environment }}]"
     runs-on: ubuntu-latest
     steps:
       - name: Clone Azure Repo
