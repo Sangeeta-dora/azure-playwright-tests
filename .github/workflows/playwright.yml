@@ -1,5 +1,7 @@
 name: Run Playwright Tests (Azure Repo with Allure Reports)
 
+run-name: Playwright:${{ replace(replace(github.event.inputs.testFile, 'tests/', ''), '.spec.js', '') }} [${{ github.event.inputs.environment }}]
+
 permissions:
   contents: write
 
