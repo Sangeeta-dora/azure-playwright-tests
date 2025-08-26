@@ -1,0 +1,3 @@
+Created directory: test-screenshots/Create_New_Activity_Cancel_btn
+Screenshot saved: test-screenshots/Create_New_Activity_Cancel_btn/Activity_details_before_canceling_2025-08-26T12-31-11-389Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_Cancel_btn/Account_overview_page_after_canceling_Activity_2025-08-26T12-31-12-088Z.png

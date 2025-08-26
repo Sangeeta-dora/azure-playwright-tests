@@ -1,0 +1,10 @@
+Contact Name that should get displayed in Notes:  Akshay_Test_Beaver(C8999)
+Contact Name that is displayed in Notes:  This is a test note for activity creation with notes functionality and today is Tue Aug 26 2025 12:32:05 GMT+0000 (Coordinated Universal Time)Phone call to:Akshay_Test_Beaver(C8999) 
+Created directory: test-screenshots/Create_New_Activity_With_Notes,_Add_contacts_and_Tagged_Invoices
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Add_contacts_and_Tagged_Invoices/Notes_details_before_saving_activity_with_contacts_2025-08-26T12-32-12-066Z.png
+Document Number before tagging:  2305
+Document Number after tagging:  2305
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Add_contacts_and_Tagged_Invoices/Transactions_tab_with_Tagged_TranID_before_saving_activity_2025-08-26T12-32-15-662Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Add_contacts_and_Tagged_Invoices/Activity_listing_in_ACtivity_table_after_creating_activity_with_notes_and_Tagged_TranID_2025-08-26T12-32-18-531Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Add_contacts_and_Tagged_Invoices/Notes_details_after_creating_activity_with_contacts_2025-08-26T12-32-21-229Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Add_contacts_and_Tagged_Invoices/Transactions_tab_after_creating_activity_with_Tagged_TranID_2025-08-26T12-32-22-372Z.png

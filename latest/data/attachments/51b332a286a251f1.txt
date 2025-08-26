@@ -1,0 +1,9 @@
+Created directory: test-screenshots/Create_New_Activity_With_followup_only
+Screenshot saved: test-screenshots/Create_New_Activity_With_followup_only/New_Activity-with_followup_2025-08-26T12-27-51-554Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_followup_only/Followup_details_before_saving_2025-08-26T12-28-01-859Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_followup_only/Followup_details_after_creating_activity_2025-08-26T12-28-09-365Z.png
+Followup checkbox status:  true
+Assigned User from dataset:  atest1
+Followup date from dataset:  08/28/2025 12:27 PM
+Response days from dataset:  2
+Description from dataset:  Test Followup description

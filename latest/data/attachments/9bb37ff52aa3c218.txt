@@ -1,0 +1,251 @@
+# Test info
+
+- Name: Create New Activity_forward email
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/React_CreateNewActivity.spec.js:244:1
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 360000ms exceeded.
+Call log:
+  - waiting for locator('//span[text()="Accounts"]')
+
+    at PageNavigation.navigateToAccounts (/home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/PageObjects/PageNavigation.js:196:29)
+    at /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/React_CreateNewActivity.spec.js:38:19
+```
+
+# Page snapshot
+
+```yaml
+- img
+- table:
+  - rowgroup:
+    - row "Username Selenium_qa Password Forgot password? Remember me Sign in Your login attempt was not successful. Please try again. Language combobox":
+      - cell "Username Selenium_qa Password Forgot password? Remember me Sign in Your login attempt was not successful. Please try again. Language combobox":
+        - text: Username
+        - textbox "Username": Selenium_qa
+        - text: Password
+        - textbox "Password"
+        - link "Forgot password?":
+          - /url: ResetPassword.aspx
+        - text: Remember me
+        - button "Sign in"
+        - text: Your login attempt was not successful. Please try again. Language
+        - table "combobox":
+          - rowgroup:
+            - row "select":
+              - cell "select"
+- iframe
+- iframe
+- iframe
+- iframe
+- iframe
+- iframe
+```
+
+# Test source
+
+```ts
+   96 |         this.Import = page.locator('//span[text()="Import"]')
+   97 |         this.Logs = page.locator('//span[text()="Logs"]')
+   98 |         this.MailRetrieval = page.locator('//span[text()="Mail Retrieval"]')
+   99 |         this.MassUpdate = page.locator('//span[text()="Mass Update"]')
+  100 |         this.SiteOptions = page.locator('//span[text()="Site Options"]')
+  101 |         this.SyncSetup = page.locator('//span[text()="Sync Setup"]')
+  102 |         this.Home = page.getByRole('link', { name: 'Home' });
+  103 |         this.Dashboard = page.getByRole('link', { name: 'Dashboard' });
+  104 |         
+  105 |         // Main menu selection element using more reliable locator
+  106 |         this.Messages = page.getByTitle('Messages', { exact: true });
+  107 |         this.viewMessages = page.getByRole('img', { name: 'Inbox' });
+  108 |
+  109 |        
+  110 |
+  111 |     }  
+  112 |
+  113 |     /**
+  114 |      * A generic navigation helper method that can be used by all specific navigation methods
+  115 |      * Handles errors, waits, and implements fallbacks for reliable navigation
+  116 |      * 
+  117 |      * @param {Object} locator - Playwright locator to click for navigation
+  118 |      * @param {string} itemName - Human-readable name of the navigation item (for logging)
+  119 |      * @param {Object} options - Additional options
+  120 |      * @param {boolean} options.waitForAnimation - Whether to wait for animations to complete
+  121 |      * @param {number} options.timeout - Custom timeout in ms
+  122 |      * @returns {Promise<boolean>} - True if navigation was successful
+  123 |      */    async navigateToItem(locator, itemName, options = {}) {
+  124 |         const timeout = options.timeout || 5000;
+  125 |         const waitForAnimation = options.waitForAnimation !== false; // Default to true
+  126 |         
+  127 |         try {
+  128 |             console.log(`Navigating to ${itemName}...`);
+  129 |             
+  130 |             // Wait for the element to be visible and stable
+  131 |             await this.page.waitForTimeout(500);
+  132 |             await locator.waitFor({ state: 'visible', timeout });
+  133 |             
+  134 |             // Click on the menu item
+  135 |             await locator.click();
+  136 |             
+  137 |             // Wait for navigation animations if needed
+  138 |             if (waitForAnimation) {
+  139 |                 await this.page.waitForTimeout(1000);
+  140 |             }
+  141 |             
+  142 |             console.log(`Successfully navigated to ${itemName}`);
+  143 |             return true;
+  144 |         } catch (error) {
+  145 |             console.error(`Error navigating to ${itemName}: ${error.message}`);
+  146 |             
+  147 |             // Try alternative approach if the main approach fails
+  148 |             try {
+  149 |                 console.log(`Trying alternative approach for ${itemName} navigation...`);
+  150 |                 
+  151 |                 // Try using JavaScript execution as a fallback
+  152 |                 await this.page.evaluate((name) => {
+  153 |                     const menuLinks = Array.from(document.querySelectorAll('a, span, div'))
+  154 |                         .filter(el => el.textContent.includes(name));
+  155 |                     
+  156 |                     if (menuLinks.length > 0) {
+  157 |                         menuLinks[0].click();
+  158 |                         return true;
+  159 |                     }
+  160 |                     return false;
+  161 |                 }, itemName);
+  162 |                 
+  163 |                 console.log(`Alternative ${itemName} navigation approach completed`);
+  164 |                 if (waitForAnimation) {
+  165 |                     await this.page.waitForTimeout(1000);
+  166 |                 }
+  167 |                 return true;
+  168 |             } catch (fallbackError) {
+  169 |                 console.error(`All ${itemName} navigation attempts failed: ${fallbackError.message}`);
+  170 |                 throw new Error(`Could not navigate to ${itemName}`);
+  171 |             }
+  172 |         }
+  173 |     }    
+  174 |     // Click on Inquiries
+  175 |     async navigateToInquiries(){
+  176 |         await this.Inquiries.click();
+  177 |     }
+  178 |
+  179 |     // Click on View Messages
+  180 |     async navigateToViewMessages(){
+  181 |         await this.viewMessages.click();
+  182 |     }
+  183 |
+  184 |     // Click on By Users
+  185 |     async navigateToByUsers(){
+  186 |         await this.ByUsers.click();
+  187 |     }
+  188 |
+  189 |     // Click on Activities
+  190 |     async navigateToActivities(){
+  191 |         await this.activities.click();
+  192 |     }    
+  193 |     
+  194 |     // Click on Accounts
+  195 |     async navigateToAccounts(){
+> 196 |         await this.Accounts.click();
+      |                             ^ Error: locator.click: Test timeout of 360000ms exceeded.
+  197 |         await this.page.waitForTimeout(1000); // Wait for the Accounts menu to stabilize
+  198 |     }
+  199 |
+  200 |     //Click on All Accounts
+  201 |     async navigateToAllAccounts(){
+  202 |         await this.AllAccounts.click();
+  203 |     }
+  204 |     
+  205 |     //Click on Home
+  206 |     /**
+  207 |      * Navigates to the Home page
+  208 |      */
+  209 |     async navigateToHome(){
+  210 |         await this.Home.click();
+  211 |     }
+  212 |
+  213 |     //Click on Dashboard
+  214 |     /**
+  215 |      * Navigates to the Dashboard page
+  216 |      */
+  217 |     async navigateToDashboard(){
+  218 |         await this.Dashboard.click();
+  219 |     }
+  220 |
+  221 |     //trying
+  222 |     async navigateToMessagesUsinguniqueLocator() {
+  223 |         console.log("Navigating to Messages using unique locator...");
+  224 |         await this.Messages_old.click()
+  225 |         await this.page.waitForTimeout(1000); // Wait for the menu to stabilize
+  226 |
+  227 |     }
+  228 |     
+  229 |     //Click on Messages
+  230 |     /**
+  231 |      * Navigates to the Messages section with enhanced reliability
+  232 |      * @returns {Promise<boolean>} - True if navigation was successful
+  233 |      */    /**
+  234 |      * Improved implementation of navigateToMessages with focused strategies
+  235 |      * @returns {Promise<boolean>} - True if navigation was successful
+  236 |      */
+  237 |     async navigateToMessages(){
+  238 |         console.log("Starting improved Messages navigation...");
+  239 |         
+  240 |         try {
+  241 |             // Approach 1: Use the most direct and reliable method first
+  242 |             await this.navigateToMessagesUsingPrimaryLocator();
+  243 |             return true;
+  244 |         } catch (error) {
+  245 |             console.log(`Primary locator approach failed: ${error.message}`);
+  246 |             
+  247 |             // Approach 2: Try the frame-specific approach
+  248 |             try {
+  249 |                 await this.navigateToMessagesUsingFrameLocator();
+  250 |                 return true;
+  251 |             } catch (frameError) {
+  252 |                 console.log(`Frame approach failed: ${frameError.message}`);
+  253 |                 
+  254 |                 // Approach 3: Use the JS evaluation approach as last resort
+  255 |                 try {
+  256 |                     return await this.navigateToMessagesUsingJSEvaluation();
+  257 |                 } catch (jsError) {
+  258 |                     console.error(`All Messages navigation approaches failed: ${jsError.message}`);
+  259 |                     return false;
+  260 |                 }
+  261 |             }
+  262 |         }
+  263 |     }
+  264 |     
+  265 |     /**
+  266 |      * Helper method that uses the primary locator for Messages menu
+  267 |      * @private
+  268 |      */
+  269 |     async navigateToMessagesUsingPrimaryLocator() {
+  270 |         console.log("Using primary locator approach for Messages...");
+  271 |         
+  272 |         // Get the most reliable locator
+  273 |         const messagesMenu = this.page.getByTitle('Messages', { exact: true });
+  274 |         
+  275 |         // Wait for it to be available and visible
+  276 |         await messagesMenu.waitFor({ state: 'visible', timeout: 10000 });
+  277 |         
+  278 |         // Add a small delay for stability
+  279 |         await this.page.waitForTimeout(300);
+  280 |         
+  281 |         // Click the menu
+  282 |         await messagesMenu.click({ timeout: 5000 });
+  283 |         console.log("Clicked Messages menu with primary locator");
+  284 |         
+  285 |         // Wait for the submenu to appear and verify
+  286 |         await this.page.waitForTimeout(800);
+  287 |         
+  288 |         // Verify that submenu items are now visible
+  289 |         const submenuVisible = await this.page.locator('text=Mail Not Read').isVisible()
+  290 |             .catch(() => false);
+  291 |             
+  292 |         if (!submenuVisible) {
+  293 |             console.log("Submenu not visible after clicking Messages, trying again");
+  294 |             await messagesMenu.click({ timeout: 5000 });
+  295 |             await this.page.waitForTimeout(1000);
+  296 |             
+```
