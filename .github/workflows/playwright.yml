@@ -122,31 +122,37 @@ jobs:
           rm -rf latest
           cp -r ${{ steps.report_folder.outputs.REPORT_DIR }} latest
 
-          # Save environment for this report
+          # Save environment for this report (from dropdown input)
           echo "${{ github.event.inputs.environment }}" > ./${{ steps.report_folder.outputs.REPORT_DIR }}/env.txt
 
           # Rebuild index.html
-          echo "<html><head><title>Allure Reports</title><style>body{font-family:Arial,sans-serif;padding:20px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}th{background-color:#f4f4f4;text-align:left}tr.latest{background-color:#d4edda;font-weight:bold}</style></head><body>" > index.html
+          echo "<html><head><title>Allure Reports</title><style>
+            body{font-family:Arial,sans-serif;padding:20px}
+            table{border-collapse:collapse;width:100%}
+            th,td{border:1px solid #ddd;padding:8px}
+            th{background-color:#f4f4f4;text-align:left}
+            tr.latest{background-color:#f4f9ff;font-weight:bold}
+          </style></head><body>" > index.html
           echo "<h1>Allure Reports</h1><table>" >> index.html
           echo "<tr><th>Timestamp</th><th>Test File</th><th>Environment</th><th>Report Link</th></tr>" >> index.html
 
-          latest=1
           for dir in $(ls -d allure-report-* 2>/dev/null | sort -r); do
               if [ -d "$dir" ]; then
                   testfile=$(echo $dir | sed -E 's/^allure-report-(.*)-[0-9]{8}-[0-9]{6}$/\1/')
                   timestamp_raw=$(echo $dir | sed -E 's/^allure-report-.*-([0-9]{8}-[0-9]{6})$/\1/')
                   timestamp=$(date -d "${timestamp_raw:0:8} ${timestamp_raw:9:2}:${timestamp_raw:11:2}:${timestamp_raw:13:2}" "+%Y-%m-%d %H:%M:%S")
                   
-                  # Read environment from env.txt if exists
+                  # Environment value comes from env.txt (always exists for new runs)
                   if [ -f "$dir/env.txt" ]; then
                       env=$(cat "$dir/env.txt")
                   else
-                      env="N/A"
+                      env="(missing)"
                   fi
 
-                  if [ $latest -eq 1 ]; then
+                  # First row = latest
+                  if [ ! "$printed_latest" ]; then
                       echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td>$env</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
-                      latest=0
+                      printed_latest=1
                   else
                       echo "<tr><td>$timestamp</td><td>$testfile</td><td>$env</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
                   fi
