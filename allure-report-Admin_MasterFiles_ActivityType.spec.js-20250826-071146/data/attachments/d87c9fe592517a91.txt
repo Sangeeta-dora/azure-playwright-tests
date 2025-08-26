@@ -1,0 +1,598 @@
+# Test info
+
+- Name: Activity Type_User should not be able to Delete System Activity Type
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityType.spec.js:230:1
+
+# Error details
+
+```
+Error: locator.isDisabled: Error: strict mode violation: locator('//*[local-name()="svg" and @data-testid="DeleteIcon"]') resolved to 2 elements:
+    1) <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="Delete" data-testid="DeleteIcon" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv">…</svg> aka getByTestId('DeleteIcon').first()
+    2) <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="Delete" data-testid="DeleteIcon" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv">…</svg> aka getByTestId('DeleteIcon').nth(1)
+
+Call log:
+  - waiting for locator('//*[local-name()="svg" and @data-testid="DeleteIcon"]')
+
+    at Admin_MasterFiles_ActivityType.returnIsdeleteBtnDisabled (/home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/PageObjects/Admin_MasterFiles_ActivityType.js:116:76)
+    at /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityType.spec.js:247:47
+```
+
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation:
+    - list:
+      - listitem:
+        - img "logo"
+      - heading "Abhangale_devqa" [level=5]
+      - listitem:
+        - link "Home":
+          - /url: /home
+          - img
+          - text: Home
+      - listitem:
+        - link "Dashboard":
+          - /url: /dashboard
+          - img
+          - text: Dashboard
+      - listitem:
+        - link "Favorites":
+          - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/UserInvoices.aspx
+          - img
+          - text: Favorites
+      - listitem:
+        - img
+        - text: Messages
+        - list:
+          - listitem:
+            - link "Customer Message 4":
+              - /url: /messages/mail-not-read?Mode=CustomerMessage&AssignedUserKey=2047&AlertDesc=Customer Message&SettingID=~All&Tiles
+          - listitem:
+            - link "Error Sending Email 93":
+              - /url: /messages/mail-not-read?Mode=ErrorSendMailAlert&AssignedUserKey=2047&AlertDesc=Error Sending Email&SettingID=~All&Tiles
+          - listitem:
+            - link "Internal Message 0":
+              - /url: /messages/mail-not-read?Mode=InternalMessage&AssignedUserKey=2047&AlertDesc=Internal Message&SettingID=~All&Tiles
+          - listitem:
+            - link "Draft Activities 3":
+              - /url: /messages/draft-activity
+          - listitem:
+            - link "Expected Payment Promise Broken 54":
+              - /url: /messages/expected-payments?Mode=BrokenPromise&AssignedUserKey=2047&AlertDesc=Expected Payment Promise Broken&Tiles
+          - listitem:
+            - link "Mail Not Read 27":
+              - /url: /messages/mail-not-read?Mode=UnreadMailAlert&AssignedUserKey=2047&AlertDesc=Mail Not Read&SettingID=~All&Tiles
+          - listitem:
+            - link "Followup Past Due 1635":
+              - /url: /messages/followup-past-due?ExcludeFromRule=False&SettingID=~PastDue&AssignedUserKey=2047&MaxToDoDate=2025-08-25&Tiles
+          - listitem:
+            - link "Mail Not Filed 54":
+              - /url: /messages/mail-not-filed
+          - listitem:
+            - link "Pending Payment NOT Reconciled 3":
+              - /url: /messages/pending-payment-not-reconciled?Mode=PendPmtNotReconciled&AssignedUserKey=2047&AlertDesc=Pending Payment NOT Reconciled&Tiles
+          - listitem:
+            - link "Followup Due Today 0":
+              - /url: /messages/followup-past-due?ExcludeFromRule=False&SettingID=~DueToday&AssignedUserKey=2047&MaxToDoDate=2025-08-26&MinToDoDate=2025-08-26&Tiles
+          - listitem:
+            - link "Open Issue without Open Activity 0":
+              - /url: /messages/mail-not-read?Mode=OrphanIssue&AssignedUserKey=2047&AlertDesc=Open Issue without Open Activity&SettingID=~All&Tiles
+          - listitem:
+            - link "Pending Payment Declined During Last 7 Days 0":
+              - /url: /messages/pending-payment-not-reconciled?Mode=PendPmtDeclined&AssignedUserKey=2047&AlertDesc=Pending Payment Declined During Last 7 Days&Tiles
+      - listitem:
+        - img
+        - text: Activities
+        - list:
+          - listitem:
+            - link "Testing US 57897 86":
+              - /url: /activities/testing-us-57897?Mode=RuleAlert&RuleKey=7667&AlertDesc=Testing US 57897
+          - listitem:
+            - link "Invoice attachment 231":
+              - /url: /activities/invoice-attachment?Mode=RuleAlert&RuleKey=7806&AlertDesc=Invoice attachment
+          - listitem:
+            - link "US 57897 Statement 20":
+              - /url: /activities/us-57897-statement?Mode=RuleAlert&RuleKey=8230&AlertDesc=US 57897 Statement
+          - listitem:
+            - link "Invoice Presentment Email to the Customer 252":
+              - /url: /activities/invoice-presentment-email-to-the-customer?Mode=RuleAlert&RuleKey=7818&AlertDesc=Invoice Presentment Email to the Customer
+          - listitem:
+            - link "First Reminder Email to the Customer 1":
+              - /url: /activities/first-reminder-email-to-the-customer?Mode=RuleAlert&RuleKey=8471&AlertDesc=First Reminder Email to the Customer
+          - listitem:
+            - link "Welcome Email to the Customer 396":
+              - /url: /activities/welcome-email-to-the-customer?Mode=RuleAlert&RuleKey=7931&AlertDesc=Welcome Email to the Customer
+      - listitem:
+        - img
+        - text: Accounts
+        - list:
+          - listitem:
+            - link "All accounts 0":
+              - /url: /accounts/all-accounts
+      - listitem:
+        - img
+        - text: Inquiries
+        - list:
+          - listitem:
+            - text: By Account
+            - list:
+              - listitem:
+                - link "Statement":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/Statements.aspx
+              - listitem:
+                - link "Contacts":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/Contacts.aspx
+              - listitem:
+                - link "Invoices":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/Invoices.aspx
+              - listitem:
+                - link "Payments":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/Payments.aspx
+              - listitem:
+                - link "Contact":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/AccountInfo.aspx
+                  - text: Contact Info
+              - listitem:
+                - link "PortalMessages":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/PortalMessages.aspx
+                  - text: Messages
+              - listitem:
+                - link "CreditInquiry":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/CreditInquiry.aspx
+                  - text: Credit Inquiry
+          - listitem:
+            - text: By User
+            - list:
+              - listitem:
+                - link "Contacts":
+                  - /url: /inquiries/by-user/contacts
+              - listitem:
+                - link "Activity Summary":
+                  - /url: /inquiries/by-user/activity-summary
+              - listitem:
+                - link "Activities":
+                  - /url: /allactivities
+              - listitem:
+                - link "Expected Payments":
+                  - /url: /inquiries/by-user/expected-payments
+              - listitem:
+                - link "Follow-Up":
+                  - /url: /inquiries/by-user/follow-up
+              - listitem:
+                - link "Mail":
+                  - /url: /inquiries/by-user/mail
+              - listitem:
+                - link "Invoices":
+                  - /url: /inquiries/by-user/invoices
+              - listitem:
+                - link "Payments":
+                  - /url: /inquiries/by-user/payments
+              - listitem:
+                - link "Pending Payment":
+                  - /url: /inquiries/by-user/pending-payments
+              - listitem:
+                - link "Scheduled Payments":
+                  - /url: /inquiries/by-user/scheduled-payments
+              - listitem:
+                - link "Projected Cash Receipts":
+                  - /url: /inquiries/by-user/projected-cash-receipts
+              - listitem:
+                - link "Reporting Group Logs":
+                  - /url: /inquiries/by-user/reporting-group-logs
+      - listitem:
+        - img
+        - text: Admin
+        - list:
+          - listitem:
+            - text: Master Files
+            - list:
+              - listitem:
+                - link "Activity Templates":
+                  - /url: /admin/master-files/activity-template
+              - listitem:
+                - link "Activity Types":
+                  - /url: /admin/master-files/activity-types
+              - listitem:
+                - link "Company":
+                  - /url: /admin/master-files/company
+              - listitem:
+                - link "CreditClassMaint":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/CreditClassMaintenance.aspx
+                  - text: Credit Class
+              - listitem:
+                - link "Customer":
+                  - /url: /admin/master-files/customer
+              - listitem:
+                - link "Communication Template":
+                  - /url: /admin/master-files/communication-template
+              - listitem:
+                - link "Reason Code":
+                  - /url: /admin/master-files/reason-code
+              - listitem:
+                - link "Report":
+                  - /url: /admin/master-files/report
+              - listitem:
+                - link "Reporting Groups":
+                  - /url: /admin/master-files/reporting-groups
+              - listitem:
+                - link "Sales Rep":
+                  - /url: /admin/master-files/sales-rep
+              - listitem:
+                - link "UserMaint":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/UserMaintenance.aspx
+                  - text: Users
+              - listitem:
+                - link "Message Settings":
+                  - /url: /admin/master-files/message-settings
+          - listitem:
+            - text: Settings & Utilities
+            - list:
+              - listitem:
+                - link "CountryMaint":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/CountryMaintenance.aspx
+                  - text: Country
+              - listitem:
+                - link "ImportCustNotes":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/ImportNotes.aspx
+                  - text: Import
+              - listitem:
+                - link "Logs":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/Logs.aspx
+              - listitem:
+                - link "MailRetrieval":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/Mailretrieval.aspx
+                  - text: Mail Retrieval
+              - listitem:
+                - link "EntityMassUpdate":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/EntityMassUpdate.aspx
+                  - text: Mass Update
+              - listitem:
+                - link "SiteOptions":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/SiteOptions.aspx
+                  - text: Site Options
+              - listitem:
+                - link "SyncSoftware":
+                  - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/SyncSchedulesMaintenance.aspx
+                  - text: Sync Setup
+          - listitem:
+            - link "AgeCustomers":
+              - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/AgeCustomers.aspx
+              - text: Age Accounts 0
+          - listitem:
+            - link "GenerateActions":
+              - /url: https://web-devqa.lockstep.network//(S(owsaawwtyvtwnvb4tppnzxpm))/Pages/GenerateActions.aspx
+              - text: Generate Actions 0
+- img "Add to favorite"
+- checkbox
+- img
+- text: Begin Typing Customer Name or ID ...
+- combobox "Begin Typing Customer Name or ID ..."
+- button "Open"
+- img "Upload"
+- button "Support/FAQ": Help
+- text: Select User to Assign
+- button "Select User to Assign": Abhangale_devqa
+- img "Inbox"
+- text: "3"
+- textbox
+- img
+- main:
+  - heading "Activity Types" [level=5]
+  - grid:
+    - button "Refresh"
+    - button "BestFit":
+      - img
+      - text: BestFit
+    - button "Export"
+    - button "Density"
+    - button "Add new record"
+    - rowgroup:
+      - row "Actions":
+        - columnheader "Actions"
+      - row "Actions":
+        - columnheader "Actions"
+    - rowgroup:
+      - row "Activity Type Issue Display Priority System Activity Exclude From Dashboard Exclude From CRM Active Proc Notes":
+        - columnheader "Activity Type":
+          - text: Activity Type
+          - button "Show filters"
+          - button "Sort"
+        - columnheader "Issue"
+        - columnheader "Display Priority"
+        - columnheader "System Activity"
+        - columnheader "Exclude From Dashboard"
+        - columnheader "Exclude From CRM"
+        - columnheader "Active"
+        - columnheader "Proc Notes"
+      - row "Activity Type Issue Display Priority System Activity Exclude From Dashboard Exclude From CRM Active Proc Notes":
+        - columnheader "Activity Type":
+          - text: Contains
+          - textbox "Contains": ExpectPay
+          - button "Clear filter"
+        - columnheader "Issue":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Display Priority":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "System Activity":
+          - text: Is
+          - combobox:
+            - option "any" [selected]
+            - option "true"
+            - option "false"
+        - columnheader "Exclude From Dashboard":
+          - text: Is
+          - combobox:
+            - option "any" [selected]
+            - option "true"
+            - option "false"
+        - columnheader "Exclude From CRM":
+          - text: Is
+          - combobox:
+            - option "any" [selected]
+            - option "true"
+            - option "false"
+        - columnheader "Active":
+          - text: Is
+          - combobox:
+            - option "any" [selected]
+            - option "true"
+            - option "false"
+        - columnheader "Proc Notes":
+          - text: Contains
+          - textbox "Contains"
+    - row:
+      - cell
+    - row:
+      - cell
+    - row "ExpectPay Expected Payment 99":
+      - cell "ExpectPay"
+      - cell "Expected Payment"
+      - cell "99"
+      - cell:
+        - checkbox [checked] [disabled]
+      - cell:
+        - checkbox [disabled]
+      - cell:
+        - checkbox [disabled]
+      - cell:
+        - checkbox [checked] [disabled]
+      - cell
+    - row "ExpectPay1234 Expected Payment 99":
+      - cell "ExpectPay1234"
+      - cell "Expected Payment"
+      - cell "99"
+      - cell:
+        - checkbox [disabled]
+      - cell:
+        - checkbox [disabled]
+      - cell:
+        - checkbox [disabled]
+      - cell:
+        - checkbox [checked] [disabled]
+      - cell
+    - paragraph: "Rows per page:"
+    - 'button "Rows per page: 20"': "20"
+    - paragraph: 1–2 of 2
+    - navigation "pagination navigation":
+      - list:
+        - listitem:
+          - button "Go to previous page" [disabled]
+        - listitem:
+          - button "page 1": "1"
+        - listitem:
+          - button "Go to next page" [disabled]
+- iframe
+- iframe
+- iframe
+- iframe
+```
+
+# Test source
+
+```ts
+   16 |          this.excludefromDashBoardchkbox= page.locator('//input[@name="excludeFromDashboard"]')
+   17 |          this.excludefromCRMchkbox= page.locator('//input[@name="excludeFromCRM"]')
+   18 |          this.activechkbx= page.locator('//input[@name="active"]')
+   19 |          this.procnotetxtarea= page.locator('//div[@contenteditable="true"]')
+   20 |          this.proctest= page.locator('div').filter({ hasText: "Please type here..." }).locator('div').first()
+   21 |          this.submitbtn= page.locator('//div[@class="MuiBox-root css-3nq2yw"]//button[@type="submit"]')
+   22 |
+   23 |           //Activity Type Table locators
+   24 |         this.searchContainer_ActivityID= page.locator('//div[@data-field="activityID" and @role="columnheader"]//input')
+   25 |         this.activitytypetitle_EditRecord= page.locator('//h5[contains(text(),"Edit Activity Type")]')
+   26 |
+   27 |         this.activityID_MandatoryError= page.locator('//p[contains(text(),"Activity ID blank or already exists")]')
+   28 |         this.description_MandatoryError= page.locator('//p[contains(text(),"Description Required")]')
+   29 |         this.displaypriority_MandatoryError= page.locator('//p[contains(text(),"Display Priority is required")]')
+   30 |
+   31 |         this.activitydeleteIcon= page.locator('//*[local-name()="svg" and @data-testid="DeleteIcon"]')
+   32 |
+   33 |         //Page Navigation locators
+   34 |         this.rowsPerPagedrpdwn= page.locator('//div[contains(@class,"MuiSelect-select MuiTablePagination")]')
+   35 |         this.pageSize_20= page.locator('//li[@role="option" and @data-value="20"]')
+   36 |         this.total_recordsNo= page.locator('//p[@class="MuiTablePagination-displayedRows css-141284n"]')
+   37 |         this.pageSize_50= page.locator('//li[@role="option" and @data-value="50"]')
+   38 |         this.pageNo_1= page.locator('button[aria-label*="page 1"]')
+   39 |         this.pageNo_2= page.locator('button[aria-label*="page 2"]')
+   40 |         this.gotoNextPage= page.locator('//button[contains(@aria-label,"Go to next page")]')
+   41 |         this.gotoPreviousPage= page.locator('//button[contains(@aria-label,"Go to previous page")]')
+   42 |     }
+   43 |
+   44 |     //To return the page name
+   45 |     async returnPageName(){
+   46 |         return this.activityType.textContent()
+   47 |     }
+   48 |
+   49 |     //To click on add new record button- Activity Template
+   50 |     async clickOnAddNewRecord(){
+   51 |         await this.addNewRecordbtn.click()
+   52 |     }
+   53 |
+   54 |     async fillActivityTypeFormDetails(activityBase, activityID, description, displayPriority, procNote){
+   55 |         await this.activityBasedrpdwn.click()
+   56 |         await this.page.locator(`//li[text()="${activityBase}"]`).click()
+   57 |         await this.activityIDtxtbx.fill(activityID)
+   58 |         await this.descriptiontxtbx.fill(description)
+   59 |         await this.displayPrioritytxtbx.fill(displayPriority)
+   60 |         await this.procnotetxtarea.click()
+   61 |         //await this.page.locator('div').filter({ hasText: /^Please type here\.\.\.$/ }).locator('div').first().fill('test-1')
+   62 |         await this.procnotetxtarea.type(procNote)
+   63 |         await this.page.waitForTimeout(2000)
+   64 |         
+   65 |         await this.excludefromDashBoardchkbox.check()
+   66 |         await this.excludefromCRMchkbox.check()
+   67 |         await this.activechkbx.check()
+   68 |        
+   69 |         //await this.submitbtn.click()
+   70 |
+   71 |     }
+   72 |
+   73 |     async fillActivityTypeFormWithMandatoryFieldsOnly(activityBase, activityID, description, displayPriority){
+   74 |         await this.activityBasedrpdwn.click()
+   75 |         await this.page.locator(`//li[text()="${activityBase}"]`).click()
+   76 |         await this.activityIDtxtbx.fill(activityID)
+   77 |         await this.descriptiontxtbx.fill(description)
+   78 |         await this.displayPrioritytxtbx.fill(displayPriority)
+   79 |     }
+   80 |
+   81 |     async clickOnSubmitActivityTypeForm(){
+   82 |         await this.submitbtn.click()
+   83 |     }
+   84 |
+   85 |      //To search activity template
+   86 |      async searchActivityType(activityID){
+   87 |         await this.searchContainer_ActivityID.fill(activityID)
+   88 |         await this.searchContainer_ActivityID.press('Enter')
+   89 |         await this.page.waitForTimeout(5000)
+   90 |     }
+   91 |
+   92 |     async editActivityTypeFormDetails(description){
+   93 |         await this.descriptiontxtbx.fill(description) 
+   94 |         await this.excludefromCRMchkbox.uncheck()
+   95 |     }
+   96 |
+   97 |     //To return validation message when mandatory field 'Activity ID' is not filled
+   98 |     async returnIsActivityID_MandatoryField(){
+   99 |         console.log("Mandatory field Validation message for Activity template: "+ await this.activityID_MandatoryError.textContent())
+  100 |         return this.activityID_MandatoryError.isVisible()
+  101 |     }
+  102 |
+  103 |     //To return validation message when mandatory field 'Description' is not filled
+  104 |     async returnIsDescription_MandatoryField(){
+  105 |         console.log("Mandatory field Validation message for Description: "+ await this.description_MandatoryError.textContent())
+  106 |         return this.description_MandatoryError.isVisible()
+  107 |     }
+  108 |
+  109 |     //To return validation message when mandatory field 'Priority' is not filled
+  110 |     async returnIsDisplayPriority_MandatoryField(){ 
+  111 |         console.log("Mandatory field Validation message for Priority: "+ await this.displaypriority_MandatoryError.textContent())
+  112 |         return this.displaypriority_MandatoryError.isVisible()
+  113 |     }
+  114 |
+  115 |     async returnIsdeleteBtnDisabled(){
+> 116 |         console.log("Delete button is disabled: "+ this.activitydeleteIcon.isDisabled())
+      |                                                                            ^ Error: locator.isDisabled: Error: strict mode violation: locator('//*[local-name()="svg" and @data-testid="DeleteIcon"]') resolved to 2 elements:
+  117 |         return this.activitydeleteIcon.isDisabled()
+  118 |     }
+  119 |
+  120 |     //To add few more activity types if the records on page are less than or equal to 20
+  121 |     async addNewActivityIfNeeded(){
+  122 |         await this.rowsPerPagedrpdwn.click()
+  123 |         await this.pageSize_20.click()
+  124 |
+  125 |         var total_records= await this.total_recordsNo.textContent()
+  126 |
+  127 |         if(total_records.split(" ")[2] <= 20){
+  128 |             var addnewrecords= 21 - total_records.split(" ")[2] 
+  129 |             console.log("adding few more records: "+addnewrecords)
+  130 |             for(let i=0; i<addnewrecords; i++){
+  131 |                 var activity_ID = 'Activity_ID_'+ Math.floor(Math.random() * 1000)
+  132 |                 await this.clickOnAddNewRecord()
+  133 |                 await this.fillActivityTypeFormWithMandatoryFieldsOnly("ExpectPay", activity_ID, "Test_desc_1", "4")
+  134 |                 await this.clickOnSubmitActivityTypeForm()
+  135 |             }
+  136 |         }
+  137 |     }
+  138 |
+  139 |     //To return true if the Records per page functionality is working fine else false
+  140 |     async validateRecordsPerPage(){
+  141 |         await this.addNewActivityIfNeeded()
+  142 |         var total_records= await this.total_recordsNo.textContent()
+  143 |         console.log("Records on page before resize: "+(total_records.split(" ")[0]).split("–")[1])
+  144 |
+  145 |         //Resizing the records per page to 50
+  146 |         await this.rowsPerPagedrpdwn.click()
+  147 |         await this.pageSize_50.click()
+  148 |         //this.page.waitForTimeout(2000)
+  149 |
+  150 |         var new_total_records= await this.total_recordsNo.textContent()
+  151 |         var newpagesize= (new_total_records.split(" ")[0]).split("–")[1]
+  152 |         console.log("Records on page after resize: "+newpagesize)
+  153 |         
+  154 |         //Validating if the records per page is resized to 50
+  155 |         if(20<newpagesize && newpagesize<=50){
+  156 |             return true
+  157 |         }
+  158 |         else{
+  159 |             return false
+  160 |         }
+  161 |     }
+  162 |
+  163 |     //To check and return if page is selected
+  164 |     async isPageSelected(selector) {
+  165 |         // Check if the button has a specific class or attribute that indicates it is selected
+  166 |         const isSelected = await this.page.evaluate((selector) => {
+  167 |             const button = document.querySelector(selector);
+  168 |             if (!button) return false;
+  169 |             // Or check for an attribute
+  170 |             return button.getAttribute('aria-pressed') === 'true';
+  171 |         }, selector);
+  172 |
+  173 |         return isSelected
+  174 |     }
+  175 |
+  176 |     //To return true if the page navigation is working fine else false
+  177 |     async validatePageNavigation(){
+  178 |
+  179 |         await this.addNewActivityIfNeeded()
+  180 |         await this.pageNo_1.click()
+  181 |         
+  182 |         if(this.isPageSelected('button[aria-label*="page 1"]')){
+  183 |             console.log("Page 1 is selected")
+  184 |         }
+  185 |         else{
+  186 |             return false;
+  187 |         }
+  188 |     
+  189 |         await this.gotoNextPage.click()
+  190 |         if(this.isPageSelected('button[aria-label*="page 2"]')){
+  191 |             console.log("clicked on next page btn and Page 2 is selected now")
+  192 |         }
+  193 |         else{
+  194 |             return false;
+  195 |         }
+  196 |         await this.gotoPreviousPage.click()
+  197 |         if(this.isPageSelected('button[aria-label*="page 1"]')){
+  198 |             console.log("clicked on previous page btn and Page 1 is selected now")
+  199 |         }
+  200 |         else{
+  201 |             return false
+  202 |         }
+  203 |         return true
+  204 |     }
+  205 |
+  206 |     //To return text cell value of the first row after search- decodedProcedureNote
+  207 |     async returnFirstRowCellValue_texttype(datafieldname){
+  208 |         console.log(`${datafieldname} value: `+ await this.page.locator(`//div[@data-field="${datafieldname}" and @role="cell"]`).textContent())
+  209 |         return await this.page.locator(`//div[@data-field="${datafieldname}" and @role="cell"]`).textContent()
+  210 |     }
+  211 |
+  212 |
+  213 |
+  214 |     
+  215 |
+  216 | }
+```

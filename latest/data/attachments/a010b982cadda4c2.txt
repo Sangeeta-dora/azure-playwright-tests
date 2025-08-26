@@ -1,3 +1,0 @@
-ruleViolationID value: Activity_temp_168
-priority value: 1
-description value: Test Issue Description
