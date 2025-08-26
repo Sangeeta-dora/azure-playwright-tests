@@ -1,0 +1,97 @@
+Number of search results for ruleViolationID is: 1
+Element 1 text: undefined_113
+Number of search results for priority is: 1
+Element 1 text: 41
+Number of search results for description is: 1
+Element 1 text: issue-desc-1
+Number of search results for longDescription is: 1
+Element 1 text: notes-41
+Number of search results for reportName is: 6
+Element 1 text: Collections Letter - EN
+Element 2 text: Collections Letter - EN
+Element 3 text: Collections Letter - EN
+Element 4 text: Collections Letter - EN
+Element 5 text: Collections Letter - EN
+Element 6 text: Collections Letter - EN
+Number of search results for emailTemplateID is: 8
+Element 1 text: First Reminder
+Element 2 text: First Reminder
+Element 3 text: First Reminder
+Element 4 text: First Reminder
+Element 5 text: First Reminder
+Element 6 text: First Reminder
+Element 7 text: First Reminder
+Element 8 text: First Reminder
+Number of search results for disputeCode is: 7
+Element 1 text: Missing PO
+Element 2 text: Missing PO
+Element 3 text: Missing PO
+Element 4 text: Missing PO
+Element 5 text: Missing PO
+Element 6 text: Missing PO
+Element 7 text: Missing PO
+string to boolean: true
+Number of search results for attachInvoices is: 11
+Element 1 is checked: true
+Element 2 is checked: true
+Element 3 is checked: true
+Element 4 is checked: true
+Element 5 is checked: true
+Element 6 is checked: true
+Element 7 is checked: true
+Element 8 is checked: true
+Element 9 is checked: true
+Element 10 is checked: true
+Element 11 is checked: true
+string to boolean: true
+Number of search results for attachInvoiceExternal is: 7
+Element 1 is checked: true
+Element 2 is checked: true
+Element 3 is checked: true
+Element 4 is checked: true
+Element 5 is checked: true
+Element 6 is checked: true
+Element 7 is checked: true
+Number of search results for limitOfAttachments is: 1
+Element 1 text: 4
+string to boolean: true
+Number of search results for isCustContact is: 11
+Element 1 is checked: true
+Element 2 is checked: true
+Element 3 is checked: true
+Element 4 is checked: true
+Element 5 is checked: true
+Element 6 is checked: true
+Element 7 is checked: true
+Element 8 is checked: true
+Element 9 is checked: true
+Element 10 is checked: true
+Element 11 is checked: true
+string to boolean: true
+Number of search results for invoiceContactTagging is: 6
+Element 1 is checked: true
+Element 2 is checked: true
+Element 3 is checked: true
+Element 4 is checked: true
+Element 5 is checked: true
+Element 6 is checked: true
+string to boolean: true
+Number of search results for invoiceContact2Tagging is: 6
+Element 1 is checked: true
+Element 2 is checked: true
+Element 3 is checked: true
+Element 4 is checked: true
+Element 5 is checked: true
+Element 6 is checked: true
+Number of search results for reportDefaultOutputText is: 11
+Element 1 text: TEXT
+Element 2 text: TEXT
+Element 3 text: TEXT
+Element 4 text: TEXT
+Element 5 text: TEXT
+Element 6 text: TEXT
+Element 7 text: TEXT
+Element 8 text: TEXT
+Element 9 text: TEXT
+Element 10 text: TEXT
+Element 11 text: TEXT
