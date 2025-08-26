@@ -34,7 +34,7 @@ on:
 
 jobs:
   playwright-test:
-    name: "Playwright: ${{ replace(replace(github.event.inputs.testFile, 'tests/', ''), '.spec.js', '') }} [${{ github.event.inputs.environment }}]"
+    name: Playwright: ${{ replace(replace(github.event.inputs.testFile, 'tests/', ''), '.spec.js', '') }} [${{ github.event.inputs.environment }}]
     runs-on: ubuntu-latest
     steps:
       - name: Clone Azure Repo
