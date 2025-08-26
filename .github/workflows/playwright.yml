@@ -15,9 +15,14 @@ on:
         required: true
         default: 'tests/Admin_MasterFiles_ActivityType.spec.js'
       environment:
-        description: "Environment to run tests against"
+        description: "Choose Environment"
         required: true
-        default: "qa"
+        type: choice
+        default: qa
+        options:
+          - devqa
+          - qa
+          - production
       workers:
         description: 'Number of workers'
         required: false
@@ -61,7 +66,6 @@ jobs:
           cd azure-repo
           echo "::group::Running Playwright Tests with Allure"
           npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} \
-            PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure \
             playwright test ${{ github.event.inputs.testFile }} \
             --reporter=line,allure-playwright \
             --workers=${{ github.event.inputs.workers }} \
@@ -106,7 +110,7 @@ jobs:
           name: allure-report-${{ steps.sanitize.outputs.filename }}
           path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
 
-      - name: Update Reports Index
+            - name: Update Reports Index
         if: always()
         run: |
           git config --global user.name github-actions
@@ -133,18 +137,19 @@ jobs:
           </style>
           </head><body>" > index.html
           echo "<h1>Allure Reports</h1><table>" >> index.html
-          echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> index.html
+          echo "<tr><th>Timestamp</th><th>Test File</th><th>Environment</th><th>Report Link</th></tr>" >> index.html
 
+          env="${{ github.event.inputs.environment }}"
           latest=1
           for dir in $(ls -d allure-report-* 2>/dev/null | sort -r); do
             if [ -d "$dir" ]; then
-              timestamp=$(echo $dir | cut -d'-' -f4-)
-              testfile=$(echo $dir | cut -d'-' -f3)
+              testfile=$(echo $dir | sed -E 's/^allure-report-(.*)-[0-9]{8}-[0-9]{6}$/\1/')
+              timestamp=$(echo $dir | sed -E 's/^allure-report-.*-([0-9]{8}-[0-9]{6})$/\1/')
               if [ $latest -eq 1 ]; then
-                echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+                echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td>$env</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
                 latest=0
               else
-                echo "<tr><td>$timestamp</td><td>$testfile</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+                echo "<tr><td>$timestamp</td><td>$testfile</td><td>$env</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
               fi
             fi
           done
