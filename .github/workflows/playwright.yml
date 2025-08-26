@@ -1,4 +1,4 @@
-name: Run Playwright Tests (Azure Repo)
+name: Run Playwright Tests (Azure Repo with Allure Reports)
 
 permissions:
   contents: write
@@ -49,25 +49,31 @@ jobs:
         run: |
           cd azure-repo
           npm install
+          npm install -D allure-playwright allure-commandline
 
       - name: Install Playwright Browsers
         run: |
           cd azure-repo
           npx playwright install --with-deps    
 
-      - name: Run Playwright Tests
+      - name: Run Playwright Tests with Allure
         run: |
           cd azure-repo
-          echo "::group::Running Playwright Tests"
-          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure playwright test ${{ github.event.inputs.testFile }} --reporter=list,html --workers=${{ github.event.inputs.workers }} --retries=${{ github.event.inputs.retry }} || true
+          echo "::group::Running Playwright Tests with Allure"
+          npx cross-env ENVIRONMENT=${{ github.event.inputs.environment }} \
+            PLAYWRIGHT_SCREENSHOT=on PLAYWRIGHT_VIDEO=on PLAYWRIGHT_TRACE=retain-on-failure \
+            playwright test ${{ github.event.inputs.testFile }} \
+            --reporter=line,allure-playwright \
+            --workers=${{ github.event.inputs.workers }} \
+            --retries=${{ github.event.inputs.retry }} || true
           echo "::endgroup::"
 
-      - name: Verify Playwright HTML Report
+      - name: Generate Allure Report
         run: |
           cd azure-repo
-          echo "Report folder contents:"
-          ls -l playwright-report
-          
+          npx allure generate ./allure-results --clean -o allure-report
+          ls -l allure-report
+
       - name: Sanitize test file name
         id: sanitize
         run: |
@@ -78,27 +84,18 @@ jobs:
         id: report_folder
         run: |
           timestamp=$(date +%Y%m%d-%H%M%S)
-          report_dir="playwright-report-${{ steps.sanitize.outputs.filename }}-$timestamp"
-          mv azure-repo/playwright-report azure-repo/$report_dir
+          report_dir="allure-report-${{ steps.sanitize.outputs.filename }}-$timestamp"
+          mv azure-repo/allure-report azure-repo/$report_dir
           echo "REPORT_DIR=$report_dir" >> $GITHUB_OUTPUT
 
-      - name: Upload Playwright Report Artifact (full report)
+      - name: Upload Allure Report Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ steps.sanitize.outputs.filename }}
+          name: allure-report-${{ steps.sanitize.outputs.filename }}
           path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
 
-      # 🚨 New cleanup step
-      - name: Strip heavy files before deploying to Pages
-        if: always()
-        run: |
-          cd azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
-          echo "Removing videos and trace zips before GitHub Pages deploy..."
-          find . -type f -name "*.webm" -print -delete
-          find . -type f -name "*.zip" -print -delete
-
-      - name: Deploy Playwright Report to GitHub Pages
+      - name: Deploy Allure Report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -117,7 +114,7 @@ jobs:
         
           cd gh-pages
         
-          echo "<html><head><title>Playwright Reports</title>
+          echo "<html><head><title>Allure Reports</title>
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
             table { border-collapse: collapse; width: 100%; }
@@ -126,11 +123,11 @@ jobs:
             tr.latest { background-color: #d4edda; font-weight: bold; }
           </style>
           </head><body>" > index.html
-          echo "<h1>Playwright Reports</h1><table>" >> index.html
+          echo "<h1>Allure Reports</h1><table>" >> index.html
           echo "<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>" >> index.html
         
           latest=1
-          for dir in $(ls -d playwright-report-* 2>/dev/null | sort -r); do
+          for dir in $(ls -d allure-report-* 2>/dev/null | sort -r); do
             if [ -d "$dir" ]; then
               timestamp=$(echo $dir | cut -d'-' -f4-)
               testfile=$(echo $dir | cut -d'-' -f3)
@@ -146,12 +143,12 @@ jobs:
           echo "</table></body></html>" >> index.html
         
           git add .
-          git commit -m "Add new report and update index [skip ci]" || echo "No changes to commit"
+          git commit -m "Add new allure report and update index [skip ci]" || echo "No changes to commit"
           git push origin gh-pages
           
-      - name: Show Report URL
+      - name: Show Allure Report URL
         run: |
-          echo "Your latest report is available at:"
+          echo "Your latest Allure report is available at:"
           echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.report_folder.outputs.REPORT_DIR }}/index.html"
           echo "Full report history:"
           echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
