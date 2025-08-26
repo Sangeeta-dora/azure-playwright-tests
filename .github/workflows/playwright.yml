@@ -110,7 +110,7 @@ jobs:
           name: allure-report-${{ steps.sanitize.outputs.filename }}
           path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
 
-            - name: Update Reports Index
+      - name: Update Reports Index
         if: always()
         run: |
           git config --global user.name github-actions
