@@ -1,9 +1,0 @@
-activityID value: TestAct_ID_344
-description value: Test_desc_1
-displayPriority value: 4
-decodedProcedureNote value: Test_note1
-
-systemActivity value: false
-excludeFromDashboard value: true
-excludeFromCRM value: true
-active value: true
