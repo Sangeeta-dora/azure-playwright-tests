@@ -15,7 +15,7 @@ on:
         required: true
         default: 'tests/Admin_MasterFiles_ActivityType.spec.js'
       environment:
-        description: "Choose Environment"
+        description: "Select Environment"
         required: true
         type: choice
         default: qa
