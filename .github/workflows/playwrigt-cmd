@@ -1,0 +1,168 @@
+name: Run Playwright Tests (with cmd)
+
+run-name: "Playwright: ${{ github.event.inputs.testFile }} [${{ github.event.inputs.environment }}]"
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch from Azure'
+        required: true
+        default: 'main'
+      playwrightcmd:
+        description: 'Playwright cmd'
+        required: true
+        default: 'npx cross-env ENVIRONMENT=qa npx playwright test tests/Admin_MasterFiles_ActivityType.spec.js --workers=2'
+      environment:
+        description: 'Select Environment'
+        required: true
+        type: choice
+        default: qa
+        options:
+          - devqa
+          - qa
+          - production
+      filename:
+        description: 'Name you test'
+        required: true
+        default: 'testname1'
+        
+
+jobs:
+  playwright-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Azure Repo
+        run: |
+          git clone --branch ${{ github.event.inputs.branch }} https://AnytimeCollect:${{ secrets.AZURE_PAT }}@dev.azure.com/AnytimeCollect/Lockstep/_git/TestCases-ReactATC azure-repo
+        env:
+          GIT_ASKPASS: /bin/echo
+          GIT_USERNAME: Lockstep
+          GIT_PASSWORD: ${{ secrets.AZURE_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          cd azure-repo
+          npm install
+          npm install -D allure-playwright allure-commandline
+
+      - name: Install Playwright Browsers
+        run: |
+          cd azure-repo
+          npx playwright install --with-deps
+
+      - name: Run Playwright Tests with Allure
+        run: |
+          cd azure-repo
+          echo "::group::Running Playwright Tests with Allure"
+          ${{ github.event.inputs.environment }} || true
+          echo "::endgroup::"
+
+      - name: Sanitize test file name
+        id: sanitize
+        run: |
+          filename=$(basename "${{ github.event.inputs.playwrightcmd }}")
+          echo "filename=$filename" >> $GITHUB_OUTPUT
+
+      - name: Generate Allure Report
+        run: |
+          cd azure-repo
+          # Restore history for trend graphs if it exists
+          if [ -d "../gh-pages/latest/history" ]; then
+            cp -r ../gh-pages/latest/history ./allure-results/
+          fi
+          npx allure generate ./allure-results --clean -o allure-report
+
+      - name: Remove large attachments
+        run: |
+          cd azure-repo/allure-report
+          find . -type f -name "*.zip" -size +50M -exec rm -v {} \;
+
+      - name: Version report folder
+        id: report_folder
+        run: |
+          timestamp=$(date +%Y%m%d-%H%M%S)
+          report_dir="allure-report-${{ steps.sanitize.outputs.filename }}-$timestamp"
+          mv azure-repo/allure-report azure-repo/$report_dir
+          echo "REPORT_DIR=$report_dir" >> $GITHUB_OUTPUT
+
+      - name: Upload Allure Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ steps.sanitize.outputs.filename }}
+          path: azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}
+
+      - name: Update Reports Index
+        if: always()
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+
+          git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          cd gh-pages
+
+          # Copy new report (skip very large files)
+          rsync -av --max-size='50M' ../azure-repo/${{ steps.report_folder.outputs.REPORT_DIR }}/ ./${{ steps.report_folder.outputs.REPORT_DIR }}/
+
+          # Update 'latest' alias
+          rm -rf latest
+          cp -r ${{ steps.report_folder.outputs.REPORT_DIR }} latest
+
+          # Save environment for this report (from dropdown input)
+          echo "${{ github.event.inputs.environment }}" > ./${{ steps.report_folder.outputs.REPORT_DIR }}/env.txt
+
+          # Rebuild index.html
+          echo "<html><head><title>Allure Reports</title><style>
+            body{font-family:Arial,sans-serif;padding:20px}
+            table{border-collapse:collapse;width:100%}
+            th,td{border:1px solid #ddd;padding:8px}
+            th{background-color:#f4f4f4;text-align:left}
+            tr.latest{background-color:#f4f9ff;font-weight:bold}
+          </style></head><body>" > index.html
+          echo "<h1>Allure Reports</h1><table>" >> index.html
+          echo "<tr><th>Timestamp</th><th>Test File</th><th>Environment</th><th>Report Link</th></tr>" >> index.html
+
+          for dir in $(ls -d allure-report-* 2>/dev/null | sort -r); do
+              if [ -d "$dir" ]; then
+                  testfile=$(echo $dir | sed -E 's/^allure-report-(.*)-[0-9]{8}-[0-9]{6}$/\1/')
+                  timestamp_raw=$(echo $dir | sed -E 's/^allure-report-.*-([0-9]{8}-[0-9]{6})$/\1/')
+                  timestamp=$(date -d "${timestamp_raw:0:8} ${timestamp_raw:9:2}:${timestamp_raw:11:2}:${timestamp_raw:13:2}" "+%Y-%m-%d %H:%M:%S")
+                  
+                  # Environment value comes from env.txt (always exists for new runs)
+                  if [ -f "$dir/env.txt" ]; then
+                      env=$(cat "$dir/env.txt")
+                  else
+                      env="(missing)"
+                  fi
+
+                  # First row = latest
+                  if [ ! "$printed_latest" ]; then
+                      echo "<tr class='latest'><td>$timestamp</td><td>$testfile</td><td>$env</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+                      printed_latest=1
+                  else
+                      echo "<tr><td>$timestamp</td><td>$testfile</td><td>$env</td><td><a href='./$dir/index.html'>View Report</a></td></tr>" >> index.html
+                  fi
+              fi
+          done
+
+          echo "</table></body></html>" >> index.html
+
+          git add .
+          git commit -m "Add new allure report and update index [skip ci]" || echo "No changes to commit"
+          git push origin gh-pages
+
+      - name: Show Allure Report URL
+        run: |
+          echo "Your latest Allure report is available at:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.report_folder.outputs.REPORT_DIR }}/index.html"
+          echo "Full report history:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
