@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Allure Report</title>
-    <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="plugin/screen-diff/styles.css">
-</head>
-<body>
-    <div id="alert"></div>
-    <div id="content">
-        <span class="spinner">
-            <span class="spinner__circle"></span>
-        </span>
-    </div>
-    <div id="popup"></div>
-    <script src="app.js"></script>
-    <script src="plugin/behaviors/index.js"></script>
-    <script src="plugin/packages/index.js"></script>
-    <script src="plugin/screen-diff/index.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVWC4GKEYS"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-FVWC4GKEYS', {
-          'allureVersion': '2.34.1',
-          'reportUuid': '551b11e7-5b35-4c7c-bcb1-afb48defc5d1',
-          'single_file': false
-        });
-    </script>
-</body>
-</html>
+<html><head><title>Allure Reports</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #ddd; padding: 8px; }
+  th { background-color: #f4f4f4; text-align: left; }
+  tr.latest { background-color: #d4edda; font-weight: bold; }
+</style>
+</head><body>
+<h1>Allure Reports</h1><table>
+<tr><th>Timestamp</th><th>Test File</th><th>Report Link</th></tr>
+<tr class='latest'><td>20250826-032440</td><td>Admin_MasterFiles_ActivityType.spec.js</td><td><a href='./allure-report-Admin_MasterFiles_ActivityType.spec.js-20250826-032440/index.html'>View Report</a></td></tr>
+</table></body></html>
