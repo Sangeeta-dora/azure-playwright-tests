@@ -1,0 +1,168 @@
+# Test info
+
+- Name: Activity Type_Add New Record and Validate details
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/Admin_MasterFiles_ActivityType.spec.js:38:1
+
+# Error details
+
+```
+Error: browserType.launch: Target page, context or browser has been closed
+Browser logs:
+
+╔════════════════════════════════════════════════════════════════════════════════════════════════╗
+║ Looks like you launched a headed browser without having a XServer running.                     ║
+║ Set either 'headless: true' or use 'xvfb-run <your-playwright-app>' before running Playwright. ║
+║                                                                                                ║
+║ <3 Playwright Team                                                                             ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════╝
+Call log:
+  - <launching> /home/runner/.cache/ms-playwright/chromium-1169/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AutoExpandDetailsElement,AvoidUnnecessaryBeforeUnloadCheckSync,CertificateTransparencyComponentUpdater,DeferRendererTasksAfterInput,DestroyProfileOnBrowserClose,DialMediaRouteProvider,ExtensionManifestV2Disabled,GlobalMediaControls,HttpsUpgrades,ImprovedCookieControls,LazyFrameLoading,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --enable-automation --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-6lxa15 --remote-debugging-pipe --no-startup-window
+  - <launched> pid=5889
+  - [pid=5889][err] [5889:5889:0827/071304.514575:ERROR:ui/ozone/platform/x11/ozone_platform_x11.cc:249] Missing X server or $DISPLAY
+  - [pid=5889][err] [5889:5889:0827/071304.514616:ERROR:ui/aura/env.cc:257] The platform failed to initialize.  Exiting.
+
+```
+
+# Test source
+
+```ts
+   1 | const {test, expect} = require('@playwright/test');
+   2 | const {Admin_MasterFiles_ActivityType} = require('../PageObjects/Admin_MasterFiles_ActivityType');
+   3 | const {PageNavigation} = require('../PageObjects/PageNavigation');
+   4 | const {ActivityCommunicateWindow} = require('../PageObjects/ActivityCommunicateWindow')
+   5 | const {LoginPage} = require('../PageObjects/LoginPage');
+   6 | const {Admin_MasterFiles_ActivityTemplate} = require('../PageObjects/Admin_MasterFiles_ActivityTemplate');
+   7 | const {AccountOverview} = require('../PageObjects/AccountOverview');
+   8 | const {AllAccounts} = require('../PageObjects/AllAccounts');
+   9 | const dataSet = JSON.parse(JSON.stringify(require("../utils/TestData.json")))  
+   10 | const log = require('console');
+   11 | const config = require('../config.js');
+   12 | const exp = require('constants');
+   13 | require('dotenv').config();
+   14 | const env = process.env.ENVIRONMENT;
+   15 | const envConfig = config[env];
+   16 |
+   17 | //TC_01 Test for user navigation to Activty Type page
+   18 | test('@pageloadtests Activity Type_Navigate to Admin_MasterFiles_ActivityType', async ({ page }) => {
+   19 |     log.info("Test for user navigation to Activty Type page");
+   20 |     const loginPage = new LoginPage(page);
+   21 |     const pageNav = new PageNavigation(page);
+   22 |     const adminMasterFilesActivityType = new Admin_MasterFiles_ActivityType(page);
+   23 |     await loginPage.navigateTo(envConfig.baseURL)
+   24 |     await loginPage.login(envConfig.userName, envConfig.password)
+   25 |     await pageNav.navigateToAdmin()
+   26 |     await pageNav.navigateToAdminMasterFiles()
+   27 |     await pageNav.navigateToActivityType()
+   28 |     var pageTitle = await adminMasterFilesActivityType.returnPageName()
+   29 |
+   30 |     //To Validate page name
+   31 |     //expect(await adminMasterFilesActivityType.returnPageName()).toContain("Activity Types")
+   32 |     expect(await adminMasterFilesActivityType.returnPageName()).toContain("Activity Types")
+   33 |     await expect(adminMasterFilesActivityType.firstRow).toBeVisible()
+   34 |     
+   35 | });
+   36 |
+   37 | //TC_02 Test for user adding new record in Activity Type and Validate those details  
+>  38 | test('Activity Type_Add New Record and Validate details', async({page}, testInfo) => {
+      | ^ Error: browserType.launch: Target page, context or browser has been closed
+   39 |     const loginPage = new LoginPage(page);
+   40 |     const pageNav = new PageNavigation(page);
+   41 |     const adminMasterFilesActivityType = new Admin_MasterFiles_ActivityType(page);
+   42 |     const adminMasterFilesActivityTemplate = new Admin_MasterFiles_ActivityTemplate(page);
+   43 |     await loginPage.navigateTo(envConfig.baseURL)
+   44 |     await loginPage.login(envConfig.userName, envConfig.password)
+   45 |     await pageNav.navigateToAdmin()
+   46 |     await pageNav.navigateToAdminMasterFiles()
+   47 |     await pageNav.navigateToActivityType()
+   48 |     await adminMasterFilesActivityType.clickOnAddNewRecord()
+   49 |     await expect(adminMasterFilesActivityType.title_AddRecord).toBeVisible()
+   50 |
+   51 |     //Fill the form details
+   52 |     var activity_ID = "TestAct_ID_"+Math.floor(Math.random() * 1000)
+   53 |     await adminMasterFilesActivityType.fillActivityTypeFormDetails("ExpectPay", activity_ID, "Test_desc_1", "4", "Test_note1")
+   54 |     await adminMasterFilesActivityType.clickOnSubmitActivityTypeForm()
+   55 |     await adminMasterFilesActivityType.searchActivityType(activity_ID)
+   56 |
+   57 |     // Zoom out the page
+   58 |     await page.evaluate(() => {
+   59 |         document.body.style.zoom = '50%'; // Set the zoom level to 50%
+   60 |     });
+   61 |     
+   62 |     // Take a screenshot before validation
+   63 |     const newActivitytype_ScreenshotPath = `screenshots/Added_NewActivityTemplate_${Date.now()}.png`;
+   64 |     await page.screenshot({ path: newActivitytype_ScreenshotPath });
+   65 |     await testInfo.attach('Screenshot After Creating Activity type successfully', { path: newActivitytype_ScreenshotPath, contentType: 'image/png' });
+   66 |
+   67 |     //Validate the details of the added Activity Type
+   68 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_texttype("activityID")).toContain(activity_ID, "Activity ID is not matching")
+   69 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_texttype("description")).toContain("Test_desc_1", "Description is not matching")
+   70 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_texttype("displayPriority")).toContain("4", "Priority is not matching")
+   71 |     expect(await adminMasterFilesActivityType.returnFirstRowCellValue_texttype("decodedProcedureNote")).toContain("Test_note1", "Proc Notes is not matching")
+   72 |     
+   73 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_checkboxtype("systemActivity")).toBe(false)
+   74 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_checkboxtype("excludeFromDashboard")).toBe(true)
+   75 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_checkboxtype("excludeFromCRM")).toBe(true)
+   76 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_checkboxtype("active")).toBe(true)
+   77 |
+   78 |      //Delete the added Activity Template and verify its deleted successfully
+   79 |      await adminMasterFilesActivityTemplate.clickOnDeleteIcon()
+   80 |      await expect(adminMasterFilesActivityType.firstRow).not.toBeVisible()
+   81 |
+   82 | });
+   83 |
+   84 | //TC_03 Test for editing the existing record in Activity Type and Validate those details
+   85 | test('Activity Type_Edit Existing Record and Validate details', async({page}, testInfo) => {
+   86 |     const loginPage = new LoginPage(page);
+   87 |     const pageNav = new PageNavigation(page);
+   88 |     const adminMasterFilesActivityType = new Admin_MasterFiles_ActivityType(page);
+   89 |     const adminMasterFilesActivityTemplate = new Admin_MasterFiles_ActivityTemplate(page);
+   90 |     await loginPage.navigateTo(envConfig.baseURL)
+   91 |     await loginPage.login(envConfig.userName, envConfig.password)
+   92 |     await pageNav.navigateToAdmin()
+   93 |     await pageNav.navigateToAdminMasterFiles()
+   94 |     await pageNav.navigateToActivityType()
+   95 |     await adminMasterFilesActivityType.clickOnAddNewRecord()
+   96 |     await expect(adminMasterFilesActivityType.title_AddRecord).toBeVisible()
+   97 |
+   98 |     //Fill the form details
+   99 |     var activity_ID = "TestAct_ID_"+Math.floor(Math.random() * 1000)
+  100 |     await adminMasterFilesActivityType.fillActivityTypeFormDetails("ExpectPay", activity_ID, "Test_desc_1", "4", "Test_note1")
+  101 |     await adminMasterFilesActivityType.clickOnSubmitActivityTypeForm()
+  102 |     await adminMasterFilesActivityType.searchActivityType(activity_ID)
+  103 |
+  104 |     //Edit the Activity Template details and submit
+  105 |     await adminMasterFilesActivityTemplate.clickOnEditIcon()
+  106 |     await expect(adminMasterFilesActivityType.activitytypetitle_EditRecord).toBeVisible()
+  107 |     await adminMasterFilesActivityType.editActivityTypeFormDetails("Test_Desc_Updated")
+  108 |     await adminMasterFilesActivityType.clickOnSubmitActivityTypeForm()
+  109 |     await adminMasterFilesActivityType.searchActivityType(activity_ID)
+  110 |
+  111 |     // Zoom out the page
+  112 |     await page.evaluate(() => {
+  113 |         document.body.style.zoom = '50%'; // Set the zoom level to 50%
+  114 |     });
+  115 |
+  116 |     //Validate the details of the edited Activity Template
+  117 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_texttype("description")).toContain("Test_Desc_Updated", "Description is not updated successfully")
+  118 |     expect(await adminMasterFilesActivityTemplate.returnFirstRowCellValue_checkboxtype("excludeFromCRM")).toBe(false)
+  119 |
+  120 |     // Take a screenshot after editing details
+  121 |     const editedSuccessfully_ScreenshotPath = `screenshots/Edited_Successfully${Date.now()}.png`;
+  122 |     await page.screenshot({ path: editedSuccessfully_ScreenshotPath });
+  123 |     await testInfo.attach('Screenshot after Editing details successfully', { path: editedSuccessfully_ScreenshotPath, contentType: 'image/png' });
+  124 |
+  125 |    //Delete the added Activity Type and verify its deleted successfully
+  126 |    await adminMasterFilesActivityTemplate.clickOnDeleteIcon()
+  127 |    await expect(adminMasterFilesActivityType.firstRow).not.toBeVisible()
+  128 | });
+  129 |
+  130 | //TC_04 Validate that user is not able to create Activity template without Mandatory fields
+  131 | test('Activity Type_Validate Mandatory fields', async({page}, testInfo) => {
+  132 |     const loginPage = new LoginPage(page);
+  133 |     const pageNav = new PageNavigation(page);
+  134 |     const adminMasterFilesActivityType = new Admin_MasterFiles_ActivityType(page);
+  135 |     const adminMasterFilesActivityTemplate = new Admin_MasterFiles_ActivityTemplate(page);
+  136 |     await loginPage.navigateTo(envConfig.baseURL)
+  137 |     await loginPage.login(envConfig.userName, envConfig.password)
+  138 |     await pageNav.navigateToAdmin()
+```
