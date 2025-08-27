@@ -63,13 +63,13 @@ jobs:
         run: |
           cd azure-repo
           echo "::group::Running Playwright Tests with Allure"
-          ${{ github.event.inputs.environment }} || true
+          ${{ github.event.inputs.playwrightcmd }} || true
           echo "::endgroup::"
 
       - name: Sanitize test file name
         id: sanitize
         run: |
-          filename=$(basename "${{ github.event.inputs.playwrightcmd }}")
+          filename=$(basename "${{ github.event.inputs.filename }}")
           echo "filename=$filename" >> $GITHUB_OUTPUT
 
       - name: Generate Allure Report
