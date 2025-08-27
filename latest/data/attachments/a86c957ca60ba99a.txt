@@ -1,0 +1,1 @@
+Test for user navigation to Activty Type page
