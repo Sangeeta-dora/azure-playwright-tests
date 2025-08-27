@@ -1,3 +1,0 @@
-Mandatory field Validation message for Activity template: Activity ID blank or already exists
-Mandatory field Validation message for Description: Description Required
-Mandatory field Validation message for Priority: Display Priority is required
