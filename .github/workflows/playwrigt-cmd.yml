@@ -69,7 +69,11 @@ jobs:
       - name: Sanitize test file name
         id: sanitize
         run: |
-          filename=$(basename "${{ github.event.inputs.filename }}")
+          # Grab the first file ending with .spec.js from the playwrightcmd
+          specfile=$(echo "${{ github.event.inputs.playwrightcmd }}" | grep -oE '[^ ]+\.spec\.js' | head -n1)
+    
+          # Remove path and extension -> clean filename
+          filename=$(basename "$specfile" .spec.js)
           echo "filename=$filename" >> $GITHUB_OUTPUT
 
       - name: Generate Allure Report
