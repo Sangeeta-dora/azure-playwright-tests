@@ -164,3 +164,12 @@ jobs:
           git add .
           git commit -m "Add new allure report and update index [skip ci]" || echo "No changes to commit"
           git push origin gh-pages
+
+      - name: Show Allure Report URL
+        run: |
+          echo "Your latest Allure report is available at:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ steps.report_folder.outputs.REPORT_DIR }}/index.html"
+          echo "Full report history:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+        
