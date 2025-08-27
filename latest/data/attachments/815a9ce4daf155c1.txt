@@ -1,5 +1,0 @@
-Records on page before resize: 20
-Records on page after resize: 43
-Page 1 is selected
-clicked on next page btn and Page 2 is selected now
-clicked on previous page btn and Page 1 is selected now
