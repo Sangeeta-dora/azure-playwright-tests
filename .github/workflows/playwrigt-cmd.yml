@@ -25,10 +25,6 @@ on:
           - devqa
           - qa
           - production
-      filename:
-        description: 'Name you test'
-        required: true
-        default: 'testname1'
         
 
 jobs:
