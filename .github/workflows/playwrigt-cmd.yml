@@ -62,15 +62,39 @@ jobs:
           ${{ github.event.inputs.playwrightcmd }} || true
           echo "::endgroup::"
 
-      - name: Sanitize test file name
+      - name: Extract filename (tag or spec files)
         id: sanitize
         run: |
-          # Grab the first file ending with .spec.js from the playwrightcmd
-          specfile=$(echo "${{ github.event.inputs.playwrightcmd }}" | grep -oE '[^ ]+\.spec\.js' | head -n1)
-    
-          # Remove path and extension -> clean filename
-          filename=$(basename "$specfile" .spec.js)
+          cmd="${{ github.event.inputs.playwrightcmd }}"
+          
+          # 1. Check for tags like @regression or @sanity (case-insensitive)
+          tag=$(echo "$cmd" | grep -ioE '@[a-zA-Z0-9_-]+' | head -n1 | sed 's/@//' | tr '[:upper:]' '[:lower:]')
+          
+          if [ -n "$tag" ]; then
+            filename="$tag"
+          else
+            # 2. Extract all spec files from the command
+            specfiles=$(echo "$cmd" | grep -oE '[^ ]+\.spec\.js')
+            filenames=""
+            for f in $specfiles; do
+              base=$(basename "$f" .spec.js)
+              if [ -z "$filenames" ]; then
+                filenames="$base"
+              else
+                filenames="${filenames}_$base"
+              fi
+            done
+            
+            # 3. Fallback if no spec files
+            if [ -z "$filenames" ]; then
+              filenames="all-specs"
+            fi
+            
+            filename="$filenames"
+          fi
+        
           echo "filename=$filename" >> $GITHUB_OUTPUT
+
 
       - name: Generate Allure Report
         run: |
