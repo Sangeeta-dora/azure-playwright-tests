@@ -1,4 +1,0 @@
-Created directory: test-screenshots/Create_New_Activity_With_Transactions
-Screenshot saved: test-screenshots/Create_New_Activity_With_Transactions/Transactions_tab_with_All_filter_2025-08-26T12-29-48-103Z.png
-Document Number before tagging:  2305
-Screenshot saved: test-screenshots/Create_New_Activity_With_Transactions/Transactions_tab_after_tagging_to_Issue_filter_2025-08-26T12-29-50-337Z.png

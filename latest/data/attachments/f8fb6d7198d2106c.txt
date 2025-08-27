@@ -1,3 +1,0 @@
-Created directory: test-screenshots/Create_New_Activity_With_Notes
-Screenshot saved: test-screenshots/Create_New_Activity_With_Notes/Notes_details_before_saving_2025-08-26T12-29-47-534Z.png
-Screenshot saved: test-screenshots/Create_New_Activity_With_Notes/Notes_details_after_creating_activity_2025-08-26T12-29-52-697Z.png
