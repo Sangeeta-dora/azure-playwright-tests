@@ -1,3 +1,0 @@
-Login page object initialized
-Performing login...
-Login successful
