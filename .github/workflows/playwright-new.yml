@@ -86,8 +86,8 @@ jobs:
             ENVIRONMENT=${{ github.event.inputs.environment }} \
             USERNAME_OVERRIDE=${{ github.event.inputs.username }} \
             PASSWORD_OVERRIDE=${{ github.event.inputs.password }} \
-            CUSTOMER_ID_OVERRIDE="${{ github.event.inputs.customer_id }}" \
-            CUSTOMER_NAME_OVERRIDE="${{ github.event.inputs.customer_name }}" \
+            CUST_ID_NAME="${{ github.event.inputs.customer_id }}" \
+            CUSTOMERNAME="${{ github.event.inputs.customer_name }}" \
             npx playwright test ${{ github.event.inputs.testFile }} \
               --reporter=line,allure-playwright \
               --workers=${{ github.event.inputs.workers }} \
