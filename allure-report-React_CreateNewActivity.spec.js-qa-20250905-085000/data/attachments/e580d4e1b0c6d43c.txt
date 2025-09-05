@@ -1,0 +1,133 @@
+# Test info
+
+- Name: Create New Activity_With email template
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/React_CreateNewActivity.spec.js:176:1
+
+# Error details
+
+```
+Error: page.waitForSelector: Test timeout of 120000ms exceeded.
+Call log:
+  - waiting for locator('//li[text()="~Standard Late"]') to be visible
+
+    at exports.selectViewSettingsOption (/home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/utils/methodHelper.js:99:16)
+    at /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/React_CreateNewActivity.spec.js:40:5
+```
+
+# Page snapshot
+
+```yaml
+- listbox "Select User to Assign":
+  - option "e2b"
+  - option "p21"
+  - option "Test123456"
+  - option "~All"
+```
+
+# Test source
+
+```ts
+   1 | /**
+   2 |  * Helper utilities for safely calling methods
+   3 |  */
+   4 |
+   5 | /**
+   6 |  * Safely calls a method on an object, handling 'this' context issues
+   7 |  * @param {Object} obj - The object containing the method
+   8 |  * @param {string} methodName - The name of the method to call
+   9 |  * @param {Array} args - Arguments to pass to the method
+   10 |  * @returns {Promise<any>} - Result of the method call
+   11 |  */
+   12 | exports.safeMethodCall = async function(obj, methodName, ...args) {
+   13 |     if (!obj || typeof obj !== 'object') {
+   14 |         throw new Error(`Invalid object passed to safeMethodCall for method '${methodName}'`);
+   15 |     }
+   16 |     
+   17 |     const method = obj[methodName];
+   18 |     if (typeof method !== 'function') {
+   19 |         console.error(`Error: '${methodName}' is not a function.`, 
+   20 |             Object.getOwnPropertyNames(obj)
+   21 |                 .filter(prop => typeof obj[prop] === 'function')
+   22 |                 .slice(0, 10)); // Log first 10 methods for debugging
+   23 |         throw new Error(`Method '${methodName}' is undefined or not a function`);
+   24 |     }
+   25 |     
+   26 |     // Bind the method to the object and call it with the provided arguments
+   27 |     return method.bind(obj)(...args);
+   28 | };
+   29 |
+   30 | /**
+   31 |  * Safely calls a UI interaction method, with fallbacks for common interactions
+   32 |  * @param {Object} page - The Playwright page object
+   33 |  * @param {Object} instance - The page object instance 
+   34 |  * @param {string} methodName - Name of the method to call
+   35 |  * @param {Object} options - Options for fallback behavior
+   36 |  * @returns {Promise<boolean>} - True if interaction was successful
+   37 |  */
+   38 | exports.safeUIInteraction = async function(page, instance, methodName, options = {}) {
+   39 |     const {
+   40 |         fallbackSelectors = [],
+   41 |         takeScreenshot = null, // Function to take screenshots
+   42 |         timeout = 5000
+   43 |     } = options;
+   44 |     
+   45 |     try {
+   46 |         // First try the direct method call
+   47 |         if (typeof instance[methodName] === 'function') {
+   48 |             await instance[methodName]();
+   49 |             return true;
+   50 |         }
+   51 |         
+   52 |         // If method doesn't exist, try fallback selectors
+   53 |         console.log(`Method ${methodName} not found, trying fallback selectors`);
+   54 |         
+   55 |         // Try each fallback selector
+   56 |         for (const selector of fallbackSelectors) {
+   57 |             try {
+   58 |                 const element = page.locator(selector);
+   59 |                 const isVisible = await element.isVisible({ timeout: 2000 }).catch(() => false);
+   60 |                 
+   61 |                 if (isVisible) {
+   62 |                     await element.click({ timeout: timeout });
+   63 |                     console.log(`Clicked element using fallback selector: ${selector}`);
+   64 |                     
+   65 |                     if (takeScreenshot) {
+   66 |                         await takeScreenshot(`after-fallback-${methodName}`);
+   67 |                     }
+   68 |                     
+   69 |                     return true;
+   70 |                 }
+   71 |             } catch (fallbackError) {
+   72 |                 console.log(`Fallback selector ${selector} failed: ${fallbackError.message}`);
+   73 |                 // Continue to next selector
+   74 |             }
+   75 |         }
+   76 |         
+   77 |         throw new Error(`All fallback attempts for ${methodName} failed`);
+   78 |     } catch (error) {
+   79 |         console.error(`Safe interaction failed for ${methodName}: ${error.message}`);
+   80 |         if (takeScreenshot) {
+   81 |             await takeScreenshot(`failed-${methodName}`);
+   82 |         }
+   83 |         throw error;
+   84 |     }
+   85 | };
+   86 |
+   87 | /**
+   88 |  * Selects a view settings option from the dropdown.
+   89 |  * @param {import('@playwright/test').Page} page - The Playwright page object
+   90 |  * @param {string} viewoption - The option to select
+   91 |  * @param {boolean} AccountOverview_activity_grid - If true, selects from the second dropdown
+   92 |  */
+   93 | exports.selectViewSettingsOption = async function(page, viewoption, AccountOverview_activity_grid = false) {
+   94 |     if (AccountOverview_activity_grid) {
+   95 |         await page.locator("(//label[text()='View Settings']//following-sibling::div//div)[2]").click();
+   96 |     } else {
+   97 |         await page.locator("(//label[text()='View Settings']//following-sibling::div//div)[1]").click();
+   98 |     }
+>  99 |     await page.waitForSelector(`//li[text()="${viewoption}"]`);
+      |                ^ Error: page.waitForSelector: Test timeout of 120000ms exceeded.
+  100 |     await page.locator(`//li[text()="${viewoption}"]`).click();
+  101 |     await page.waitForTimeout(5000); // Wait for the view to apply
+  102 | };
+```
