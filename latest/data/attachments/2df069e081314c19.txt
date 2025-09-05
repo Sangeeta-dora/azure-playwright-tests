@@ -1,6 +1,0 @@
-Login page object initialized
-Performing login...
-Login successful
-Created directory: test-screenshots/Create_New_Activity_Cancel_btn
-Screenshot saved: test-screenshots/Create_New_Activity_Cancel_btn/Activity_details_before_canceling_2025-09-05T08-46-41-849Z.png
-Screenshot saved: test-screenshots/Create_New_Activity_Cancel_btn/Account_overview_page_after_canceling_Activity_2025-09-05T08-46-42-555Z.png

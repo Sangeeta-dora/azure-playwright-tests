@@ -1,6 +1,0 @@
-Login page object initialized
-Performing login...
-Login successful
-Created directory: test-screenshots/Create_New_Activity_With_Notes
-Screenshot saved: test-screenshots/Create_New_Activity_With_Notes/Notes_details_before_saving_2025-09-05T08-44-59-404Z.png
-Screenshot saved: test-screenshots/Create_New_Activity_With_Notes/Notes_details_after_creating_activity_2025-09-05T08-45-02-742Z.png

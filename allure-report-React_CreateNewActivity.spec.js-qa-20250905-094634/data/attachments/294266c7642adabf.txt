@@ -1,0 +1,7 @@
+Login page object initialized
+Performing login...
+Login successful
+Subject line for forwarded email:  FW:A4103 Akshay_Profile: Statement DreamHost:0000289892
+Created directory: test-screenshots/Create_New_Activity_forward_email
+Screenshot saved: test-screenshots/Create_New_Activity_forward_email/Forward_Email_details_before_save_and_send_2025-09-05T09-37-17-537Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_forward_email/Email_details_after_successfully_creating_activity_via_Forward_functionality_2025-09-05T09-37-32-796Z.png

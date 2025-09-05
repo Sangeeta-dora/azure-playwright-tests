@@ -1,0 +1,13 @@
+Login page object initialized
+Performing login...
+Login successful
+Created directory: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Notes_details_before_saving_activity_2025-09-05T09-45-46-958Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Expected_Payments_details_before_saving_activity_2025-09-05T09-45-48-158Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Email_details_before_saving_activity_2025-09-05T09-45-49-434Z.png
+Attempt 1: Email not sent yet. Retrying...
+Attempt 2: Email not sent yet. Retrying...
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Activity_listing_in_ACtivity_table_after_creating_activity_with_Notes,_Expected_Payments_and_Email_2025-09-05T09-46-22-974Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Notes_details_after_creating_activity_2025-09-05T09-46-25-050Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Expected_Payments_details_after_creating_activity_2025-09-05T09-46-25-407Z.png
+Screenshot saved: test-screenshots/Create_New_Activity_With_Notes,_Expected_payments_and_email/Email_details_after_creating_activity_2025-09-05T09-46-25-834Z.png

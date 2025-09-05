@@ -1,9 +1,0 @@
-Login page object initialized
-Performing login...
-Login successful
-Created directory: test-screenshots/Create_New_Activity_With_followup,_email_and_attachament
-Screenshot saved: test-screenshots/Create_New_Activity_With_followup,_email_and_attachament/Followup_details_before_save_and_send_2025-09-05T08-47-32-929Z.png
-Screenshot saved: test-screenshots/Create_New_Activity_With_followup,_email_and_attachament/Email_details_before_save_and_send_2025-09-05T08-47-34-464Z.png
-Screenshot saved: test-screenshots/Create_New_Activity_With_followup,_email_and_attachament/Attachment_details_before_save_and_send_2025-09-05T08-47-37-248Z.png
-Attempt 1: Email not sent yet. Retrying...
-Attempt 2: Email not sent yet. Retrying...

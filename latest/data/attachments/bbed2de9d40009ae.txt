@@ -1,7 +1,0 @@
-Login page object initialized
-Performing login...
-Login successful
-Created directory: test-screenshots/Create_New_Activity_With_Notes_and_save_it_as_Draft
-Screenshot saved: test-screenshots/Create_New_Activity_With_Notes_and_save_it_as_Draft/Notes_details_before_saving_as_draft_2025-09-05T08-47-21-357Z.png
-Navigating to Messages using unique locator...
-Screenshot saved: test-screenshots/Create_New_Activity_With_Notes_and_save_it_as_Draft/Drafted_Activity_details_after_saving_as_draft_2025-09-05T08-47-25-328Z.png
