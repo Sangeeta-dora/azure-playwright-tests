@@ -1,0 +1,657 @@
+# Test info
+
+- Name: InquireByUserInvoices_Click on Export to Excel
+- Location: /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/InquiesByUserInvoices.spec.js:27:1
+
+# Error details
+
+```
+Error: page.waitForEvent: Test timeout of 120000ms exceeded.
+=========================== logs ===========================
+waiting for event "download"
+============================================================
+    at /home/runner/work/azure-playwright-tests/azure-playwright-tests/azure-repo/tests/InquiesByUserInvoices.spec.js:33:32
+```
+
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation:
+    - list:
+      - listitem:
+        - img "logo"
+      - heading "Selenium_QA" [level=5]
+      - listitem:
+        - link "Home":
+          - /url: /home
+          - img
+          - text: Home
+      - listitem:
+        - link "Dashboard":
+          - /url: /dashboard
+          - img
+          - text: Dashboard
+      - listitem:
+        - img
+        - text: Favorites
+        - list:
+          - listitem:
+            - link "Communication ~ All 0":
+              - /url: /allactivities
+          - listitem:
+            - link "Communication ~ All 0":
+              - /url: /allactivities
+          - listitem:
+            - link "Communication ~ All 0":
+              - /url: /allactivities
+          - listitem:
+            - link "Communication ~ All 0":
+              - /url: /allactivities
+          - listitem:
+            - link "Communication ~ All 0":
+              - /url: /allactivities
+          - listitem:
+            - link "Communication ~ All 0":
+              - /url: /allactivities
+          - listitem:
+            - link "CompanyMaintenance ~ All 0":
+              - /url: /admin/master-files/company
+      - listitem:
+        - img
+        - text: Messages
+        - list:
+          - listitem:
+            - link "Error Sending Email 38":
+              - /url: /messages/mail-not-read?Mode=ErrorSendMailAlert&AssignedUserKey=230&AlertDesc=Error Sending Email&SettingID=~All&Tiles
+          - listitem:
+            - link "Internal Message 0":
+              - /url: /messages/mail-not-read?Mode=InternalMessage&AssignedUserKey=230&AlertDesc=Internal Message&SettingID=~All&Tiles
+          - listitem:
+            - link "Draft Activities 5":
+              - /url: /messages/draft-activity
+          - listitem:
+            - link "Expected Payment Promise Broken 184":
+              - /url: /messages/expected-payments?Mode=BrokenPromise&AssignedUserKey=230&AlertDesc=Expected Payment Promise Broken&Tiles
+          - listitem:
+            - link "Mail Not Read 1":
+              - /url: /messages/mail-not-read?Mode=UnreadMailAlert&AssignedUserKey=230&AlertDesc=Mail Not Read&SettingID=~All&Tiles
+          - listitem:
+            - link "Followup Past Due 2258":
+              - /url: /messages/followup-past-due?ExcludeFromRule=False&SettingID=~PastDue&AssignedUserKey=230&MaxToDoDate=2025-09-05&Tiles
+          - listitem:
+            - link "Mail Not Filed 53":
+              - /url: /messages/mail-not-filed
+          - listitem:
+            - link "Pending Pmt NOT Reconciled 2":
+              - /url: /messages/pending-payment-not-reconciled?Mode=PendPmtNotReconciled&AssignedUserKey=230&AlertDesc=Pending Pmt NOT Reconciled&Tiles
+          - listitem:
+            - link "Followup Due Today 0":
+              - /url: /messages/followup-past-due?ExcludeFromRule=False&SettingID=~DueToday&AssignedUserKey=230&MaxToDoDate=2025-09-06&MinToDoDate=2025-09-06&Tiles
+          - listitem:
+            - link "Open Issue without Open Activity 0":
+              - /url: /messages/mail-not-read?Mode=OrphanIssue&AssignedUserKey=230&AlertDesc=Open Issue without Open Activity&SettingID=~All&Tiles
+          - listitem:
+            - link "Pending Payment Declined During Last 7 Days 0":
+              - /url: /messages/pending-payment-not-reconciled?Mode=PendPmtDeclined&AssignedUserKey=230&AlertDesc=Pending Payment Declined During Last 7 Days&Tiles
+      - listitem:
+        - img
+        - text: Activities
+        - list:
+          - listitem:
+            - link "Email only 28":
+              - /url: /activities/email-only?Mode=RuleAlert&RuleKey=4722&AlertDesc=Email only
+          - listitem:
+            - link "Report Only 2":
+              - /url: /activities/report-only?Mode=RuleAlert&RuleKey=4669&AlertDesc=Report Only
+          - listitem:
+            - link "Email & Report 28":
+              - /url: /activities/email-&-report?Mode=RuleAlert&RuleKey=4670&AlertDesc=Email & Report
+          - listitem:
+            - link "Invoice Rep Group 27":
+              - /url: /activities/invoice-rep-group?Mode=RuleAlert&RuleKey=4723&AlertDesc=Invoice Rep Group
+          - listitem:
+            - link "Customer Report Group 28":
+              - /url: /activities/customer-report-group?Mode=RuleAlert&RuleKey=4724&AlertDesc=Customer Report Group
+          - listitem:
+            - link "Embedded Report Test 28":
+              - /url: /activities/embedded-report-test?Mode=RuleAlert&RuleKey=4725&AlertDesc=Embedded Report Test
+          - listitem:
+            - link "No Send 27":
+              - /url: /activities/no-send?Mode=RuleAlert&RuleKey=4726&AlertDesc=No Send
+          - listitem:
+            - link "Invoice Contact & Primary 28":
+              - /url: /activities/invoice-contact-&-primary?Mode=RuleAlert&RuleKey=4727&AlertDesc=Invoice Contact & Primary
+          - listitem:
+            - link "Invoice Contact Mix 82":
+              - /url: /activities/invoice-contact-mix?Mode=RuleAlert&RuleKey=4728&AlertDesc=Invoice Contact Mix
+          - listitem:
+            - link "Invoice Contact 1 & 2 84":
+              - /url: /activities/invoice-contact-1-&-2?Mode=RuleAlert&RuleKey=4729&AlertDesc=Invoice Contact 1 & 2
+          - listitem:
+            - link "Invoice Contact 2 83":
+              - /url: /activities/invoice-contact-2?Mode=RuleAlert&RuleKey=4730&AlertDesc=Invoice Contact 2
+          - listitem:
+            - link "Invoice Contact 1 50":
+              - /url: /activities/invoice-contact-1?Mode=RuleAlert&RuleKey=4731&AlertDesc=Invoice Contact 1
+      - listitem:
+        - img
+        - text: Accounts
+        - list:
+          - listitem:
+            - link "All accounts 0":
+              - /url: /accounts/all-accounts
+      - listitem:
+        - img
+        - text: Inquiries
+        - list:
+          - listitem:
+            - text: By Account
+            - list:
+              - listitem:
+                - link "Statement":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/Statements.aspx
+              - listitem:
+                - link "Contacts":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/Contacts.aspx
+              - listitem:
+                - link "Invoices":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/Invoices.aspx
+              - listitem:
+                - link "Payments":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/Payments.aspx
+              - listitem:
+                - link "Contact":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/AccountInfo.aspx
+                  - text: Contact Info
+              - listitem:
+                - link "PortalMessages":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/PortalMessages.aspx
+                  - text: Messages
+              - listitem:
+                - link "CreditInquiry":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/CreditInquiry.aspx
+                  - text: Credit Inquiry
+          - listitem:
+            - text: By User
+            - list:
+              - listitem:
+                - link "Contacts":
+                  - /url: /inquiries/by-user/contacts
+              - listitem:
+                - link "Activity Summary":
+                  - /url: /inquiries/by-user/activity-summary
+              - listitem:
+                - link "Activities":
+                  - /url: /allactivities
+              - listitem:
+                - link "Expected Payments":
+                  - /url: /inquiries/by-user/expected-payments
+              - listitem:
+                - link "Follow-Up":
+                  - /url: /inquiries/by-user/follow-up
+              - listitem:
+                - link "Mail":
+                  - /url: /inquiries/by-user/mail
+              - listitem:
+                - link "Invoices":
+                  - /url: /inquiries/by-user/invoices
+              - listitem:
+                - link "Payments":
+                  - /url: /inquiries/by-user/payments
+              - listitem:
+                - link "Pending Payment":
+                  - /url: /inquiries/by-user/pending-payments
+              - listitem:
+                - link "Scheduled Payments":
+                  - /url: /inquiries/by-user/scheduled-payments
+              - listitem:
+                - link "Projected Cash Receipts":
+                  - /url: /inquiries/by-user/projected-cash-receipts
+              - listitem:
+                - link "Reporting Group Logs":
+                  - /url: /inquiries/by-user/reporting-group-logs
+      - listitem:
+        - img
+        - text: Admin
+        - list:
+          - listitem:
+            - text: Master Files
+            - list:
+              - listitem:
+                - link "Activity Templates":
+                  - /url: /admin/master-files/activity-template
+              - listitem:
+                - link "Activity Types":
+                  - /url: /admin/master-files/activity-types
+              - listitem:
+                - link "Company":
+                  - /url: /admin/master-files/company
+              - listitem:
+                - link "Credit Class":
+                  - /url: /admin/master-files/credit-class
+              - listitem:
+                - link "Customer":
+                  - /url: /admin/master-files/customer
+              - listitem:
+                - link "Communication Template":
+                  - /url: /admin/master-files/communication-template
+              - listitem:
+                - link "Reason Code":
+                  - /url: /admin/master-files/reason-code
+              - listitem:
+                - link "Report":
+                  - /url: /admin/master-files/report
+              - listitem:
+                - link "Reporting Groups":
+                  - /url: /admin/master-files/reporting-groups
+              - listitem:
+                - link "Sales Rep":
+                  - /url: /admin/master-files/sales-rep
+              - listitem:
+                - link "UserMaint":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/UserMaintenance.aspx
+                  - text: Users
+              - listitem:
+                - link "Message Settings":
+                  - /url: /admin/master-files/message-settings
+          - listitem:
+            - text: Settings & Utilities
+            - list:
+              - listitem:
+                - link "CountryMaint":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/CountryMaintenance.aspx
+                  - text: Country
+              - listitem:
+                - link "ImportCustNotes":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/ImportNotes.aspx
+                  - text: Import
+              - listitem:
+                - link "Logs":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/Logs.aspx
+              - listitem:
+                - link "MailRetrieval":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/Mailretrieval.aspx
+                  - text: Mail Retrieval
+              - listitem:
+                - link "EntityMassUpdate":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/EntityMassUpdate.aspx
+                  - text: Mass Update
+              - listitem:
+                - link "SiteOptions":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/SiteOptions.aspx
+                  - text: Site Options
+              - listitem:
+                - link "SyncSoftware":
+                  - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/SyncSchedulesMaintenance.aspx
+                  - text: Sync Setup
+          - listitem:
+            - link "AgeCustomers":
+              - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/AgeCustomers.aspx
+              - text: Age Accounts 0
+          - listitem:
+            - link "GenerateActions":
+              - /url: https://web-qa.lockstep.network//(S(r3h2dwzvop5uzplgqbxpikak))/Pages/GenerateActions.aspx
+              - text: Generate Actions 0
+- img "Add to favorite"
+- checkbox
+- img
+- text: Begin Typing Customer Name or ID ...
+- combobox "Begin Typing Customer Name or ID ..."
+- button "Open"
+- img "Upload"
+- button "Support/FAQ": Help
+- text: Select User to Assign
+- button "Select User to Assign": Selenium QA
+- img "Inbox"
+- text: "26"
+- textbox
+- img
+- main:
+  - text: View Settings
+  - button "Select User to Assign": ~Open
+  - checkbox "Show Invoice Lines"
+  - text: Show Invoice Lines
+  - heading "Total Amount 0.00" [level=5]
+  - heading "Total Balance 0.00" [level=5]
+  - grid:
+    - button "FILTERS"
+    - button "Select columns": Columns
+    - button "Export To Excel"
+    - button "Refresh"
+    - button "Best Fit":
+      - img
+      - text: Best Fit
+    - button "Density"
+    - button "View Settings"
+    - button "Alert"
+    - button "Reports"
+    - searchbox "Search…"
+    - rowgroup:
+      - row "Select all rows CompanyID CustID CustName Invoice Display Invoice Date Due Date Amount Balance DiscAmt DiscDate CopyPDFMessage AssignedUserID LastActivityNote LastActivityDate CurrID PaySched PmtTermsID CustPONo Reason Code InDispute ExcludeAging Resolved DisputeDate DisputeAmt DisputeCodeDate Dispute Note LastActivityUserID DueDateDays TranDateDays PrimarySperName PercentPaid DaysPaidLate LastPmtDate LastPmtAmt CustomerSperName InvcContactName InvcContactName2 OvrdInvcContact OvrdInvcContact2 Insert Date Update Date Do Not Sync":
+        - columnheader "Select all rows":
+          - checkbox "Select all rows"
+        - columnheader "CompanyID"
+        - columnheader "CustID"
+        - columnheader "CustName"
+        - columnheader "Invoice"
+        - columnheader "Display"
+        - columnheader "Invoice Date"
+        - columnheader "Due Date"
+        - columnheader "Amount"
+        - columnheader "Balance"
+        - columnheader "DiscAmt"
+        - columnheader "DiscDate"
+        - columnheader "CopyPDFMessage"
+        - columnheader "AssignedUserID"
+        - columnheader "LastActivityNote"
+        - columnheader "LastActivityDate"
+        - columnheader "CurrID"
+        - columnheader "PaySched"
+        - columnheader "PmtTermsID"
+        - columnheader "CustPONo"
+        - columnheader "Reason Code"
+        - columnheader "InDispute"
+        - columnheader "ExcludeAging"
+        - columnheader "Resolved"
+        - columnheader "DisputeDate"
+        - columnheader "DisputeAmt"
+        - columnheader "DisputeCodeDate"
+        - columnheader "Dispute Note"
+        - columnheader "LastActivityUserID"
+        - columnheader "DueDateDays"
+        - columnheader "TranDateDays"
+        - columnheader "PrimarySperName"
+        - columnheader "PercentPaid"
+        - columnheader "DaysPaidLate"
+        - columnheader "LastPmtDate"
+        - columnheader "LastPmtAmt"
+        - columnheader "CustomerSperName"
+        - columnheader "InvcContactName"
+        - columnheader "InvcContactName2"
+        - columnheader "OvrdInvcContact"
+        - columnheader "OvrdInvcContact2"
+        - columnheader "Insert Date"
+        - columnheader "Update Date"
+        - columnheader "Do Not Sync"
+      - row "Checkbox selection CompanyID CustID CustName Invoice Display Invoice Date Due Date Amount Balance DiscAmt DiscDate CopyPDFMessage AssignedUserID LastActivityNote LastActivityDate CurrID Select User to Assign Clear PmtTermsID CustPONo Reason Code DisputeDate DisputeAmt DisputeCodeDate Dispute Note LastActivityUserID DueDateDays TranDateDays PrimarySperName PercentPaid DaysPaidLate LastPmtDate LastPmtAmt CustomerSperName InvcContactName InvcContactName2 Insert Date Update Date Do Not Sync":
+        - columnheader "Checkbox selection"
+        - columnheader "CompanyID":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "CustID":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "CustName":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Invoice":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Display"
+        - columnheader "Invoice Date":
+          - text: Is
+          - textbox "Is"
+        - columnheader "Due Date":
+          - text: Is
+          - textbox "Is"
+        - columnheader "Amount":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "Balance":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "DiscAmt":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "DiscDate":
+          - text: Is
+          - textbox "Is"
+        - columnheader "CopyPDFMessage":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "AssignedUserID":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "LastActivityNote":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "LastActivityDate":
+          - text: Is
+          - textbox "Is"
+        - columnheader "CurrID":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Select User to Assign Clear":
+          - button "Select User to Assign Clear": Clear
+        - columnheader "PmtTermsID":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "CustPONo":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Reason Code":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Select User to Assign Clear":
+          - button "Select User to Assign Clear": Clear
+        - columnheader "Select User to Assign Clear":
+          - button "Select User to Assign Clear": Clear
+        - columnheader "Select User to Assign Clear":
+          - button "Select User to Assign Clear": Clear
+        - columnheader "DisputeDate":
+          - text: Is
+          - textbox "Is"
+        - columnheader "DisputeAmt":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "DisputeCodeDate":
+          - text: Is
+          - textbox "Is"
+        - columnheader "Dispute Note":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "LastActivityUserID":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "DueDateDays":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "TranDateDays":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "PrimarySperName":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "PercentPaid":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "DaysPaidLate":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "LastPmtDate":
+          - text: Is
+          - textbox "Is"
+        - columnheader "LastPmtAmt":
+          - text: Equals
+          - spinbutton "Equals"
+        - columnheader "CustomerSperName":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "InvcContactName":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "InvcContactName2":
+          - text: Contains
+          - textbox "Contains"
+        - columnheader "Select User to Assign Clear":
+          - button "Select User to Assign Clear": Clear
+        - columnheader "Select User to Assign Clear":
+          - button "Select User to Assign Clear": Clear
+        - columnheader "Insert Date":
+          - text: Is
+          - textbox "Is"
+        - columnheader "Update Date":
+          - text: Is
+          - textbox "Is"
+        - columnheader "Do Not Sync":
+          - text: Is
+          - combobox:
+            - option "any" [selected]
+            - option "true"
+            - option "false"
+    - progressbar:
+      - img
+    - paragraph: "Rows per page:"
+    - 'button "Rows per page: 20"': "20"
+    - paragraph: 0–0 of 0
+    - navigation "pagination navigation":
+      - list:
+        - listitem:
+          - button "Go to previous page" [disabled]
+        - listitem:
+          - button "Go to next page" [disabled]
+- iframe
+- iframe
+- iframe
+- iframe
+```
+
+# Test source
+
+```ts
+   1 | const { expect } = require('@playwright/test');
+   2 | const { test } = require('../Fixtures/fixtures.js');
+   3 | const { InquiryUserInvoices } = require('../PageObjects/InquiryUserInvoices.js');
+   4 | const config = require('../config.js');
+   5 | require('dotenv').config();
+   6 | const env = process.env.ENVIRONMENT;
+   7 | const envConfig = config[env];
+   8 |
+   9 | // Load test data
+   10 | const dataSet = JSON.parse(JSON.stringify(require("../utils/TestData.json")));
+   11 |
+   12 | let inquiryUserInvoices;
+   13 |
+   14 | // test.beforeEach(async ({ page }) => {
+   15 | //     inquiryUserInvoices = new InquiryUserInvoices(page);
+   16 | // });
+   17 |
+   18 | // Test: Page load
+   19 |
+   20 | test('@pageloadtests InquireByUserInvoices_Navigate to InquireByUserInvoices', async ({ userInvoicesPageReady, page, pageNav }) => {
+   21 |   const inquiryUserInvoices = new InquiryUserInvoices(pageNav.page)
+   22 |   await expect(inquiryUserInvoices.firstissue).toBeVisible();
+   23 | });
+   24 |
+   25 | // Test: Export to Excel
+   26 |
+   27 | test('InquireByUserInvoices_Click on Export to Excel', async ({ userInvoicesPageReady, page, pageNav }) => {
+   28 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   29 |   await inquiryUserInvoices.clickonExport();
+   30 |   console.log('✅ Clicked Export to Excel button');
+   31 |   await page.screenshot({ path: 'UserInvoices_ExportToExcel.png' });
+   32 |   // Handle the download
+>  33 |   const downloadPromise = page.waitForEvent('download');
+      |                                ^ Error: page.waitForEvent: Test timeout of 120000ms exceeded.
+   34 |   const download = await downloadPromise;
+   35 |   // Save the file
+   36 |   const downloadPath = `test-results/${download.suggestedFilename()}`;
+   37 |   await download.saveAs(downloadPath);
+   38 |   console.log(`✅ File downloaded and saved to: ${downloadPath}`);
+   39 |   await inquiryUserInvoices.validateExcelFile(downloadPath);
+   40 |   // Verify the page is still functional after export
+   41 |   await expect(inquiryUserInvoices.firstissue).toBeVisible();
+   42 |   await inquiryUserInvoices.takeScreenshot('InquiriesByUserActivities_ExportToExcel', 'InquiriesByUserActivities');
+   43 |
+   44 |   console.log('🎉 Excel export test completed successfully');
+   45 | });
+   46 |
+   47 | // Test: Refresh
+   48 |
+   49 | test('InquireByUserInvoices_Click on Refresh', async ({ userInvoicesPageReady, page, pageNav }) => {
+   50 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   51 |   await inquiryUserInvoices.clickonrefresh();
+   52 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_Refresh.png');
+   53 | });
+   54 |
+   55 | // Test: Best Fit
+   56 | test('InquireByUserInvoices_Click on Best Fit', async ({ userInvoicesPageReady, page, pageNav }) => {
+   57 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   58 |   await inquiryUserInvoices.clickonBestFit();
+   59 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_BestFit.png');
+   60 | });
+   61 |
+   62 |
+   63 | // Test: Density - Compact
+   64 |
+   65 | test('InquireByUserInvoices_Click on Density Compact', async ({ userInvoicesPageReady, page, pageNav }) => {
+   66 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   67 |   await inquiryUserInvoices.clickonDensity();
+   68 |   await inquiryUserInvoices.clickonCompact();
+   69 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_DensityCompact.png');
+   70 | });
+   71 |
+   72 | // Test: Density - Standard
+   73 |
+   74 | test('InquireByUserInvoices_Click on Density Standard', async ({ userInvoicesPageReady, page, pageNav }) => {
+   75 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   76 |   await inquiryUserInvoices.clickonDensity();
+   77 |   await inquiryUserInvoices.clickonStandard();
+   78 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_DensityStandard.png');
+   79 | });
+   80 |
+   81 | // Test: Density - Comfortable
+   82 |
+   83 | test('InquireByUserInvoices_Click on Density Comfortable', async ({ userInvoicesPageReady, page, pageNav }) => {
+   84 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   85 |   await inquiryUserInvoices.clickonDensity();
+   86 |   await inquiryUserInvoices.clickonComfortable();
+   87 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_DensityComfortable.png');
+   88 | });
+   89 |
+   90 | // Test: Search
+   91 |
+   92 | test('InquireByUserInvoices_Click on Search', async ({ userInvoicesPageReady, page, pageNav }) => {
+   93 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+   94 |   await inquiryUserInvoices.clickonSearch();
+   95 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_Search.png');
+   96 | });
+   97 |
+   98 | // Test: Clear Search Box
+   99 |
+  100 | test('InquireByUserInvoices_Click on Clear Search Box', async ({ userInvoicesPageReady, page, pageNav }) => {
+  101 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+  102 |   await inquiryUserInvoices.clickonSearch();
+  103 |   await inquiryUserInvoices.clearSearchBox();
+  104 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_ClearSearchBox.png');
+  105 | });
+  106 |
+  107 | // Test: Select Row Checkbox
+  108 |
+  109 | test('InquireByUserInvoices_Click on Row Checkbox', async ({ userInvoicesPageReady, page, pageNav }) => {
+  110 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+  111 |   await inquiryUserInvoices.SelectRowCheckBox();
+  112 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_RowCheckbox.png');
+  113 | });
+  114 |
+  115 | // Test: Account Details
+  116 |
+  117 | test('InquireByUserInvoices_Click on Account Details', async ({ userInvoicesPageReady, page, pageNav }) => {
+  118 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+  119 |   await inquiryUserInvoices.clickonAccountDetails();
+  120 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_AccountDetails.png');
+  121 | });
+  122 |
+  123 | // Test: New Activity
+  124 |
+  125 | test('InquireByUserInvoices_Click on New Activity', async ({ userInvoicesPageReady, page, pageNav }) => {
+  126 |   const inquiryUserInvoices = new InquiryUserInvoices(userInvoicesPageReady)
+  127 |   await inquiryUserInvoices.clickonNewActivity();
+  128 |   await inquiryUserInvoices.takeScreenshot('UserInvoices_NewActivity.png');
+  129 | });
+  130 |
+  131 | // Test: Total Amount and Balance
+  132 |
+  133 | test('InquireByUserInvoices_Verify Total Amount and Balance', async ({ userInvoicesPageReady, page, pageNav }) => {
+```

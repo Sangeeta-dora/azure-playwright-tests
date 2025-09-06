@@ -1,0 +1,27 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: Should load a saved view configuration
+Created directory: test-screenshots/Should_load_a_saved_view_configuration
+Screenshot folder initialized for test: Should load a saved view configuration
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test
+Ensuring page is fully loaded before opening dialog...
+Page should be stable now
+Screenshot saved: test-screenshots/Unknown_Test/before-view-settings-click_2025-09-06T11-55-43-831Z.png
+Opening View Settings dialog with retry logic...
+Opening View Settings dialog...
+Clicked on View Settings button
+Screenshot saved: test-screenshots/Unknown_Test/before-view-settings-dialog_2025-09-06T11-55-44-377Z.png
+View Settings button clicked successfully
+Screenshot saved: test-screenshots/Unknown_Test/view-settings-dialog-opened_2025-09-06T11-55-44-602Z.png
+Verifying View Settings dialog is visible...
+Checking for dialog with standard locator...
+View Settings dialog found with standard locator
+Screenshot saved: test-screenshots/Unknown_Test/view-settings-verification_2025-09-06T11-55-44-818Z.png
+Screenshot saved: test-screenshots/Unknown_Test/view-settings-dialog-loaded_2025-09-06T11-55-44-973Z.png
+Attempting to click on Load button for a saved view...
+Successfully clicked on Load button
+Screenshot saved: test-screenshots/Unknown_Test/after-load-button-click_2025-09-06T11-55-45-857Z.png
+View configuration loaded successfully
+Screenshot saved: test-screenshots/Unknown_Test/view-configuration-loaded_2025-09-06T11-55-50-122Z.png

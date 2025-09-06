@@ -1,0 +1,1 @@
+Error clicking edit button: this.clickEditIcon is not a function

@@ -1,0 +1,11 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: Invoices page_ Verify that user is able to click on do not sync and click on save
+Created directory: test-screenshots/Invoices_page__Verify_that_user_is_able_to_click_on_do_not_sync_and_click_on_save
+Screenshot folder initialized for test: Invoices page_ Verify that user is able to click on do not sync and click on save
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test
+Ensuring page is fully loaded before opening dialog...
+Page should be stable now
+Screenshot saved: test-screenshots/Unknown_Test/before_clicking_on_invoices_link_2025-09-06T11-57-11-006Z.png

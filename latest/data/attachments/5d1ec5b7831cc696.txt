@@ -1,0 +1,9 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: InquireByUserInvoices_Verify Total Amount and Balance
+Created directory: test-screenshots/InquireByUserInvoices_Verify_Total_Amount_and_Balance
+Screenshot folder initialized for test: InquireByUserInvoices_Verify Total Amount and Balance
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test
+Screenshot saved: test-screenshots/Unknown_Test/UserInvoices_TotalAmountAndBalance.png_2025-09-06T11-51-16-901Z.png

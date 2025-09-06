@@ -1,0 +1,8 @@
+Error selecting random number: locator.click: Error: strict mode violation: getByRole('option', { name: '5' }) resolved to 3 elements:
+    1) <li tabindex="-1" role="option" data-value="5" aria-selected="false" class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-1dsdfb">…</li> aka getByRole('option', { name: '5', exact: true })
+    2) <li tabindex="-1" role="option" data-value="15" aria-selected="false" class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-1dsdfb">…</li> aka getByRole('option', { name: '15' })
+    3) <li tabindex="-1" role="option" data-value="25" aria-selected="false" class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-1dsdfb">…</li> aka getByRole('option', { name: '25' })
+
+Call log:
+  - waiting for getByRole('option', { name: '5' })
+

@@ -1,0 +1,8 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: InquireByUserInvoices_Click on Density Comfortable
+Created directory: test-screenshots/InquireByUserInvoices_Click_on_Density_Comfortable
+Screenshot folder initialized for test: InquireByUserInvoices_Click on Density Comfortable
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test

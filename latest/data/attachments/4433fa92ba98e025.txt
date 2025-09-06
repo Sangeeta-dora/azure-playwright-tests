@@ -1,0 +1,8 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: @pageloadtests InquireByUserInvoices_Navigate to InquireByUserInvoices
+Created directory: test-screenshots/@pageloadtests_InquireByUserInvoices_Navigate_to_InquireByUserInvoices
+Screenshot folder initialized for test: @pageloadtests InquireByUserInvoices_Navigate to InquireByUserInvoices
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test

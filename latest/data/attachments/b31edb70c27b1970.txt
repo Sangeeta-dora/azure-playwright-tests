@@ -1,0 +1,8 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: InquireByUserInvoices_Click on Account Details
+Created directory: test-screenshots/InquireByUserInvoices_Click_on_Account_Details
+Screenshot folder initialized for test: InquireByUserInvoices_Click on Account Details
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test

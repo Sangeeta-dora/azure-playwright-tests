@@ -1,0 +1,10 @@
+Login page object initialized
+Performing login...
+Login successful
+Set test info: InquireByUserInvoices_Click on Refresh
+Created directory: test-screenshots/InquireByUserInvoices_Click_on_Refresh
+Screenshot folder initialized for test: InquireByUserInvoices_Click on Refresh
+Checking for Sara chat popup...
+No Sara chat popup detected - proceeding with test
+Created directory: test-screenshots/Unknown_Test
+Screenshot saved: test-screenshots/Unknown_Test/UserInvoices_Refresh.png_2025-09-06T11-47-13-359Z.png
